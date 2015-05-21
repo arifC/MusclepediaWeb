@@ -1,0 +1,43 @@
+@start("Trainingspläne Anfänger"){
+    <script src="@routes.Assets.at("javascripts/plaene.js")" type="text/javascript"></script>
+<div class="text-center">
+    <h3 class="text-center"> Anfänger - Traininspläne</h3>
+    <br>
+    <table class="table table-striped">
+        <thead class="text-center">
+            <div class="container">
+                <tr>
+                    <th class="text-center col-md-3"> Name </th>
+                    <th class="text-center col-md-3"> Beschreibung </th>
+                    <th class="text-center col-md-3"> Übungen </th>
+                    <th class="text-center col-md-3"></th>
+                </tr>
+            </div>
+        </thead>
+        <tbody class="text-center">
+            <tr>
+                <td>Ganzkörpersplit - 2 Tage</td>
+                <td>Hier kommt die Beschreibung</td>
+                <td>
+                    <ul>
+                        <li> Tag 1: Brust, Arme, Schultern </li>
+                        <li> Tag 2: Bauch, Beine, Rücken </li>
+                    </ul>
+                </td>
+                <td> <input type="submit" value="Add to plans" onclick="addToPlan()"/> </td>
+            </tr>
+            <tr>
+                <td>Ganzkörpersplit</td>
+                <td>Hier kommt die Beschreibung</td>
+                <td>
+                    <ul>
+                        <li> Tag 1: Brust, Arme, Schultern </li>
+                        <li> Tag 2: Bauch, Beine, Rücken </li>
+                    </ul>
+                </td>
+                <td> <input type="submit" value="Add to plans" onclick="addToPlan()"/> </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+}

@@ -1,0 +1,20 @@
+@start("Kontakt"){
+    <div class="row text-center">
+        <div class="col-md-8" id="kontakt">
+            <p>Über das Formular auf dieser Seite können sie Kontakt mit uns aufnehmen, egal ob es um Verbesserungsvorschläge, Kritik oder Probleme mit der Seite selbst handelt.</p>
+            <p> Bitte achte darauf das alle notwendigen Angeben vorhanden sind und das du bei Problemen genau beschreibst was wann geschehen ist</p>
+            <form method="post">
+                <section>
+                    <option value="Verbesserung">Verbesserungsvorschlag </option>
+                    <option value="Kritik">Kritik </option>
+                    <option value="Eintrag">neue Übung/neues Studio </option>
+                    <option value="Problem">Probleme mit der Seite </option>
+                </section>
+                <p> Name: <input type="text" placeholder="Nachname" required> <input type="text" placeholder="Vorname"required> </p>
+                <p> E-Mail:<input type="email" required> An diese Adresse wird die Antwort geschrieben </p>
+                <p>Ihre Nachricht an uns: <input type="text" id="nachricht"> </p>
+                <button type="submit">Abschicken </button>
+            </form>
+        </div>
+    </div>
+}
