@@ -53,4 +53,12 @@ public class Application extends Controller {
         return ok(login.render());
     }
 
+    public static Result searchStudio(String studio) {
+        String result = "";
+        switch (studio){
+            case "k":
+                result ="konstanz";
+        }
+        return ok(result);
+    }
 }
