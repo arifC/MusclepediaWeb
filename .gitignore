@@ -5,6 +5,7 @@ target
 tmp
 .history
 dist
+/build.sbt
 /.sbtserver
 /.idea
 /*.iml
@@ -12,5 +13,6 @@ dist
 /.idea_modules
 /.classpath
 /.project
+
 /RUNNING_PID
 /.settings
