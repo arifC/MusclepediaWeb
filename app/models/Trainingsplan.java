@@ -1,7 +1,5 @@
 package models;
 
-import play.data.format.*;
-import play.db.ebean.*;
 import javax.persistence.*;
 import play.data.validation.*;
 import javax.persistence.Entity;
@@ -15,18 +13,18 @@ public class Trainingsplan {
     public int Plan_id;
     @Constraints.Required
     private String typ;
-    private SortedMap<Integer,Uebungen> uebungsliste = new TreeMap<Integer, Uebungen>();
+    private SortedMap<Integer, Uebung> uebungsliste = new TreeMap<Integer, Uebung>();
     public Trainingsplan(String typ){
         this.typ=typ;
     }
 
-    public void addUebung(Uebungen u){
+    public void addUebung(Uebung u){
         uebungsliste.put(u.uebung_id,u);
     }
-    public void deleteUebung(Uebungen u){
+    public void deleteUebung(Uebung u){
         uebungsliste.remove(u.uebung_id);
     }
-    public Collection<Uebungen> showPlan(){
+    public Collection<Uebung> showPlan(){
         return uebungsliste.values();
     }
 

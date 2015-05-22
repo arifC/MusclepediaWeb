@@ -7,8 +7,11 @@ import play.mvc.*;
 import views.html.*;
 import play.data.Form;
 
+import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 import java.util.UUID;
 
 public class Application extends Controller {
@@ -45,11 +48,30 @@ public class Application extends Controller {
     }
     public static Result plaene_profi() {return ok(plaene_profi.render());
     }
+
+    public static String verschluesseln(String eingabe){
+        String result = null;
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("MD5");
+            md.update(eingabe.getBytes(Charset.forName("UTF-8")));
+            result = String.format(Locale.ROOT, "%032x", new BigInteger(1, md.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        }
+        return result;
+
+    }
     public static Result benutzer_anlegen(){
-        DynamicForm dynamicForm = Form.form().bindFromRequest();
-        UUID id = UUID.randomUUID();
-        Benutzer user = new Benutzer(id,dynamicForm.get("benutzername"),dynamicForm.get("mail"),dynamicForm.get("passwort2"));
-        Ebean.save(user);
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            DynamicForm dynamicForm = Form.form().bindFromRequest();
+            UUID id = UUID.randomUUID();
+            Benutzer user = new Benutzer(id,dynamicForm.get("benutzername"),dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
+            Ebean.save(user);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+    }
         return ok(login.render());
     }
 

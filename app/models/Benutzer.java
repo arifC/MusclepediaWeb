@@ -1,11 +1,10 @@
 package models;
 
-import play.data.format.*;
-import play.db.ebean.*;
-import javax.persistence.*;
+import org.springframework.context.annotation.Conditional;
 import play.data.validation.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import javax.validation.Constraint;
 
 import java.util.UUID;
 
@@ -20,13 +19,18 @@ public class Benutzer{
     private String email;
     @Constraints.Required
     private String passwort;
+    @ManyToOne
+    private Studio studio;
+    @Constraints.Required
+    private String test;
+
 
     private Trainingsplan myPlan= new Trainingsplan("Custom Plan");
 
-    public void addToPlan(Uebungen u){
+    public void addToPlan(Uebung u){
         myPlan.addUebung(u);
     }
-    public void deleteFromPlan(Uebungen u){
+    public void deleteFromPlan(Uebung u){
         myPlan.deleteUebung(u);
     }
     public void showPlan(){

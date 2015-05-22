@@ -12,5 +12,6 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   ws,
-  "org.xerial" % "sqlite-jdbc" % "3.7.15-M1"
+  "mysql" % "mysql-connector-java" % "5.1.34"
+  //"org.xerial" % "sqlite-jdbc" % "3.7.15-M1"
 )

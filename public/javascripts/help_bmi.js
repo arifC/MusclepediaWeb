@@ -14,13 +14,13 @@ function bmirechnen(){
             $("#bmierg").html("Normalgewichtig der BMI liegt bei:"+bmi);
         }
         if(bmi>=25 && bmi<20){
-            $("#bmierg").html("Leichtes �bergewicht der BMI liegt bei:" +bmi);
+            $("#bmierg").html("Leichtes Übergewicht der BMI liegt bei:" +bmi);
         }
         if(bmi>=30 && bmi<40){
-            $("#bmierg").html("�bergewichtig der BMI liegt bei:"+bmi);
+            $("#bmierg").html("Übergewichtig der BMI liegt bei:"+bmi);
         }
         if(bmi>=40){
-            $("#bmierg").html("Sehr starkes �bergewicht der BMI liegt bei:"+bmi);
+            $("#bmierg").html("Sehr starkes Übergewicht der BMI liegt bei:"+bmi);
         }
 
     }else{
@@ -31,13 +31,13 @@ function bmirechnen(){
             $("#bmierg").html("Normalgewichtig der BMI liegt bei:"+bmi);
         }
         if(bmi>=24 && bmi<30){
-            $("#bmierg").html("Leichtes �bergewicht der BMI liegt bei:"+bmi);
+            $("#bmierg").html("Leichtes Übergewicht der BMI liegt bei:"+bmi);
         }
         if(bmi>=30 && bmi<40){
-            $("#bmierg").html("�bergewichtig der BMI liegt bei:"+bmi);
+            $("#bmierg").html("Übergewichtig der BMI liegt bei:"+bmi);
         }
         if(bmi>=40){
-            $("#bmierg").html("Sehr starkes �bergewicht der BMI liegt bei:"+bmi);
+            $("#bmierg").html("Sehr starkes Übergewicht der BMI liegt bei:"+bmi);
         }
 
     }

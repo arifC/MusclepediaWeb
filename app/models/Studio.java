@@ -5,9 +5,21 @@ import java.util.List;
 
 import play.data.format.*;
 import play.data.validation.*;
+import org.springframework.context.annotation.Conditional;
+import play.data.validation.*;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.Constraint;
+
+import java.util.UUID;
+
+@Entity
 public class Studio {
-    public long studi_id;
+    @Id
+    private int id;
     private String plz;
     private String ort;
     private String strasse;
