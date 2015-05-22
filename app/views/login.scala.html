@@ -1,12 +1,14 @@
 @firstPage("Musclepedia"){
     <div class="row text-center">
-        <div class="col-md-8 col-md-offset-2" id="content">
-            <ul class="nav nav-tabs" role="tablist" id="myTab">
-                <li class="active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
-                <li><a href="#register" role="tab" data-toggle="tab">Registrieren</a></li>
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="col-md-6 tab-pane active" id="login">
+
+        <div id="content">
+
+            <div class="tab-content col-md-4 col-md-offset-2">
+                <ul class="nav nav-tabs" role="tablist" id="myTab">
+                    <li class="active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
+                    <li><a href="#register" role="tab" data-toggle="tab">Registrieren</a></li>
+                </ul>
+                <div role="tabpanel" class="tab-pane active" id="login">
                     <form method="get" action="/start">
                         <div class="form-group">
                             <h3>Login</h3>
@@ -21,7 +23,7 @@
                         </div>
                     </form>
                 </div>
-                <div role="tabpanel" class="tab-pane col-md-6" id="register">
+                <div role="tabpanel" class="tab-pane" id="register">
                     <form method="post" action="/benutzer_anlegen" name="regForm" onsubmit="return validateForm() ">
                         <div class="form-group">
                             <h3>Registrieren</h3>
@@ -41,7 +43,9 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6">
+            </div>
+
+                <div class="col-md-4 col-md-offset-1">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                         <ol class="carousel-indicators">
@@ -53,15 +57,15 @@
                             <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img src="@routes.Assets.at("images/login_bild.jpg")" alt="...">
+                                <img class="img-circle" src="@routes.Assets.at("images/login_bild.jpg")" alt="...">
                                 <div class="carousel-caption">
-                                    <h2>Übungslehre</h2>
+                                    <h4>Übungslehre</h4>
                                 </div>
                             </div>
                             <div class="item">
-                                <img src="@routes.Assets.at("images/login_slide.jpg")" alt="...">
+                                <img class="img-circle" src="@routes.Assets.at("images/login_slide.jpg")" alt="...">
                                 <div class="carousel-caption">
-                                    <h2>Krafttraining</h2>
+                                    <h4>Krafttraining</h4>
                                 </div>
                             </div>
                             ...
@@ -78,7 +82,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+
         </div>
         <script type="text/javascript">
             $(document).ready(function ($) {

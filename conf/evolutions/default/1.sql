@@ -8,13 +8,13 @@ create table benutzer (
   name                      varchar(255),
   email                     varchar(255),
   passwort                  varchar(255),
-  studio_studio_id          integer,
+  studio_id                 integer,
   test                      varchar(255),
   constraint pk_benutzer primary key (benutzer_id))
 ;
 
 create table studio (
-  studio_id                 integer auto_increment not null,
+  id                        integer auto_increment not null,
   plz                       varchar(255),
   ort                       varchar(255),
   strasse                   varchar(255),
@@ -24,7 +24,7 @@ create table studio (
   gesamt_lage               double,
   gesamt_preis              double,
   gesamt_service            double,
-  constraint pk_studio primary key (studio_id))
+  constraint pk_studio primary key (id))
 ;
 
 create table trainingsplan (
@@ -41,8 +41,8 @@ create table uebung (
   constraint pk_uebung primary key (uebung_id))
 ;
 
-alter table benutzer add constraint fk_benutzer_studio_1 foreign key (studio_studio_id) references studio (studio_id) on delete restrict on update restrict;
-create index ix_benutzer_studio_1 on benutzer (studio_studio_id);
+alter table benutzer add constraint fk_benutzer_studio_1 foreign key (studio_id) references studio (id) on delete restrict on update restrict;
+create index ix_benutzer_studio_1 on benutzer (studio_id);
 
 
 

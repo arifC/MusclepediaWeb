@@ -1,0 +1,16 @@
+hr {
+    border: none;
+    color: #337AB7;
+    height: 1px;
+}
+
+h1,h2 {
+    color: #337AB7;
+    font-ariant: small caps;
+    text-shadow: 0 0 0.1em #87F, 0 0 0.1em #87F,
+    0 0 0.1em #87F;
+}
+h4 {
+    color: #337AB7;
+    font-ariant: small caps;
+}
