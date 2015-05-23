@@ -2,11 +2,22 @@ package models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
+import org.springframework.context.annotation.Conditional;
+import play.data.validation.*;
+
+import javax.persistence.*;
+import javax.validation.Constraint;
 /**
  * Created by ArifC on 03.05.2015.
  */
+@Entity
 public class Gewicht {
+
+    @Id
+    private UUID Gewicht;
+    @Constraints.Required
     private double gewicht;
     private Date datum;
     private String datumText;

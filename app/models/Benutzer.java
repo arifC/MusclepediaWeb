@@ -10,7 +10,8 @@ import java.util.UUID;
 
 
 @Entity
-public class Benutzer{
+public class
+        Benutzer{
     @Id
     private UUID benutzer_id;
     @Constraints.Required
@@ -23,8 +24,12 @@ public class Benutzer{
     private Studio studio;
     @Constraints.Required
     private String test;
+    @OneToMany
+    private Gewicht gewicht;
+    public void addGewicht(){
 
-
+    }
+    @OneToOne
     private Trainingsplan myPlan= new Trainingsplan("Custom Plan");
 
     public void addToPlan(Uebung u){

@@ -17,7 +17,7 @@ public class Uebung {
     public int uebung_id;
     @Constraints.Required
     private String name;
-    @Constraints.Required
+
     private List<Muskel> muskeln = new ArrayList<Muskel>();
     @Constraints.Required
     private String beschreibung;

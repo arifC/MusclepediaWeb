@@ -8,10 +8,7 @@ import play.data.validation.*;
 import org.springframework.context.annotation.Conditional;
 import play.data.validation.*;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.Constraint;
 
 import java.util.UUID;
@@ -24,6 +21,7 @@ public class Studio {
     private String ort;
     private String strasse;
     private String name;
+
     private List<Bewertung> bewertungen = new ArrayList<Bewertung>();
     private double gesamtBewertung;
     private double gesamtAusstattung = 0;

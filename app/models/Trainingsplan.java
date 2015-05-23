@@ -6,13 +6,15 @@ import javax.persistence.Entity;
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.SortedMap;
+import java.util.UUID;
 
 @Entity
 public class Trainingsplan {
     @Id
-    public int Plan_id;
+    public UUID Plan_id;
     @Constraints.Required
     private String typ;
+
     private SortedMap<Integer, Uebung> uebungsliste = new TreeMap<Integer, Uebung>();
     public Trainingsplan(String typ){
         this.typ=typ;

@@ -10,7 +10,15 @@ create table benutzer (
   passwort                  varchar(255),
   studio_id                 integer,
   test                      varchar(255),
+  my_plan_plan_id           varchar(40),
   constraint pk_benutzer primary key (benutzer_id))
+;
+
+create table gewicht (
+  gewicht                   varchar(40) not null,
+  datum                     datetime,
+  datum_text                varchar(255),
+  constraint pk_gewicht primary key (gewicht))
 ;
 
 create table studio (
@@ -28,7 +36,7 @@ create table studio (
 ;
 
 create table trainingsplan (
-  plan_id                   integer auto_increment not null,
+  plan_id                   varchar(40) not null,
   typ                       varchar(255),
   constraint pk_trainingsplan primary key (plan_id))
 ;
@@ -43,6 +51,8 @@ create table uebung (
 
 alter table benutzer add constraint fk_benutzer_studio_1 foreign key (studio_id) references studio (id) on delete restrict on update restrict;
 create index ix_benutzer_studio_1 on benutzer (studio_id);
+alter table benutzer add constraint fk_benutzer_myPlan_2 foreign key (my_plan_plan_id) references trainingsplan (plan_id) on delete restrict on update restrict;
+create index ix_benutzer_myPlan_2 on benutzer (my_plan_plan_id);
 
 
 
@@ -51,6 +61,8 @@ create index ix_benutzer_studio_1 on benutzer (studio_id);
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table benutzer;
+
+drop table gewicht;
 
 drop table studio;
 
