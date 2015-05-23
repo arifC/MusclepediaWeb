@@ -16,13 +16,15 @@ import java.util.UUID;
 @Entity
 public class Studio {
     @Id
-    private int id;
+    private UUID id;
     private String plz;
     private String ort;
     private String strasse;
     private String name;
 
+    @OneToMany(mappedBy ="Studio" )
     private List<Bewertung> bewertungen = new ArrayList<Bewertung>();
+
     private double gesamtBewertung;
     private double gesamtAusstattung = 0;
     private double gesamtLage = 0;

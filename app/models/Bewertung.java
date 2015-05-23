@@ -1,12 +1,24 @@
 package models;
 
-import play.data.format.*;
+import org.springframework.context.annotation.Conditional;
 import play.data.validation.*;
 
+import javax.persistence.*;
+import javax.validation.Constraint;
+
+import java.util.UUID;
+
+@Entity
 public class Bewertung {
+    @Id
+    private UUID Bewertung_ID;
+    @Constraints.Required
     private double ausstattung;
+    @Constraints.Required
     private double service;
+    @Constraints.Required
     private double preis;
+    @Constraints.Required
     private double lage;
 
     public Bewertung(double ausstattung, double service, double preis, double lage){

@@ -16,7 +16,7 @@ import javax.validation.Constraint;
 public class Gewicht {
 
     @Id
-    private UUID Gewicht;
+    private UUID Gewicht_ID;
     @Constraints.Required
     private double gewicht;
     private Date datum;

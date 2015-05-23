@@ -2,6 +2,8 @@ package models;
 
 import javax.persistence.*;
 import play.data.validation.*;
+import play.db.ebean.Model;
+
 import javax.persistence.Entity;
 import java.util.Collection;
 import java.util.TreeMap;
@@ -15,6 +17,7 @@ public class Trainingsplan {
     @Constraints.Required
     private String typ;
 
+    @ManyToMany(mappedBy="Trainingsplan")
     private SortedMap<Integer, Uebung> uebungsliste = new TreeMap<Integer, Uebung>();
     public Trainingsplan(String typ){
         this.typ=typ;
