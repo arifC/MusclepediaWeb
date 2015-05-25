@@ -22,7 +22,7 @@ public class Studio {
     private String strasse;
     private String name;
 
-    @OneToMany(mappedBy ="Studio" )
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Bewertung> bewertungen = new ArrayList<Bewertung>();
 
     private double gesamtBewertung;

@@ -16,6 +16,7 @@ create table benutzer (
 
 create table bewertung (
   bewertung_id              varchar(40) not null,
+  studio_id                 varchar(40) not null,
   ausstattung               double,
   service                   double,
   preis                     double,
@@ -59,22 +60,14 @@ create table uebung (
   constraint pk_uebung primary key (uebung_id))
 ;
 
-
-create table studio_bewertung (
-  studio_id                      varchar(40) not null,
-  bewertung_bewertung_id         varchar(40) not null,
-  constraint pk_studio_bewertung primary key (studio_id, bewertung_bewertung_id))
-;
 alter table benutzer add constraint fk_benutzer_studio_1 foreign key (studio_id) references studio (id) on delete restrict on update restrict;
 create index ix_benutzer_studio_1 on benutzer (studio_id);
 alter table benutzer add constraint fk_benutzer_myPlan_2 foreign key (my_plan_plan_id) references trainingsplan (plan_id) on delete restrict on update restrict;
 create index ix_benutzer_myPlan_2 on benutzer (my_plan_plan_id);
+alter table bewertung add constraint fk_bewertung_studio_3 foreign key (studio_id) references studio (id) on delete restrict on update restrict;
+create index ix_bewertung_studio_3 on bewertung (studio_id);
 
 
-
-alter table studio_bewertung add constraint fk_studio_bewertung_studio_01 foreign key (studio_id) references studio (id) on delete restrict on update restrict;
-
-alter table studio_bewertung add constraint fk_studio_bewertung_bewertung_02 foreign key (bewertung_bewertung_id) references bewertung (bewertung_id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -87,8 +80,6 @@ drop table bewertung;
 drop table gewicht;
 
 drop table studio;
-
-drop table studio_bewertung;
 
 drop table trainingsplan;
 
