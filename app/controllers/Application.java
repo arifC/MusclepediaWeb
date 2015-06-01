@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -19,7 +20,9 @@ public class Application extends Controller {
     public static Result login(){return ok(login.render());
     }
 
-    public static Result start() {return ok(home.render());
+    public static Result start() {
+        Benutzer user = new Benutzer("Gerhart", "test@mail.com", "passwort");
+        return ok(home.render(user, "Jo"));
     }
 
     public static Result help() {return ok(help.render());
@@ -67,7 +70,7 @@ public class Application extends Controller {
             MessageDigest md = MessageDigest.getInstance("MD5");
             DynamicForm dynamicForm = Form.form().bindFromRequest();
             UUID id = UUID.randomUUID();
-            Benutzer user = new Benutzer(id,dynamicForm.get("benutzername"),dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
+            Benutzer user = new Benutzer(dynamicForm.get("benutzername"),dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
             Ebean.save(user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

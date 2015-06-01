@@ -14,6 +14,8 @@ public class
         Benutzer{
     @Id
     private UUID benutzer_id;
+
+
     @Constraints.Required
     private String name;
     @Constraints.Required
@@ -43,8 +45,8 @@ public class
         myPlan.showPlan();
     }
 
-    public Benutzer(UUID id, String name,String mail,String passwort){
-        this.benutzer_id = id;
+    public Benutzer(String name,String mail,String passwort){
+        this.benutzer_id = UUID.randomUUID();
         this.name = name;
         this.email = mail;
         this.passwort = passwort;
@@ -59,5 +61,9 @@ public class
 
         }else
             System.out.println("Passwort falsch");
+    }
+
+    public String getName() {
+        return name;
     }
 }
