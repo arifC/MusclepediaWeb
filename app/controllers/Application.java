@@ -21,8 +21,26 @@ public class Application extends Controller {
     }
 
     public static Result start() {
-        Benutzer user = new Benutzer("Gerhart", "test@mail.com", "passwort");
-        return ok(home.render(user, "Jo"));
+        Benutzer loggedIn = null;
+        boolean treffer = false;
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        List<Benutzer> users = Ebean.find(models.Benutzer.class).findList();
+        for(Benutzer user : users){
+            System.out.println(user.getName());
+            System.out.println(dynamicForm.get("username"));
+            String db_name = user.getName();
+            String logInName = dynamicForm.get("username");
+            if(db_name.matches(logInName)){
+                loggedIn = user;
+                treffer = true;
+            }
+        }
+        if (treffer){
+            return ok(home.render(loggedIn));
+        }
+        else{
+            return redirect("/");
+        }
     }
 
     public static Result help() {return ok(help.render());
