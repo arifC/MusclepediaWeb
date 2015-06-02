@@ -43,7 +43,10 @@ public class Application extends Controller {
     }
     public static Result kontakt(){return ok(kontakt.render());
     }
-    public static Result profil(){return ok(profil.render());
+    public static Result profil(){
+
+        Benutzer user = new Benutzer("Zink", "test@mail.com", "passwort");
+        return ok(profil.render(user));
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
     }

@@ -44,6 +44,9 @@ public class
         //wie sollen wir die hier ausgeben??
         myPlan.showPlan();
     }
+    public String getEmail(){
+        return email;
+    }
 
     public Benutzer(String name,String mail,String passwort){
         this.benutzer_id = UUID.randomUUID();

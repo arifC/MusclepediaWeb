@@ -1,5 +1,5 @@
 
-
+@(user: models.Benutzer)
 @start("Musclepedia"){
     <div role="tabpanel" class="tab-pane">
         <div class="row text-center">
@@ -7,11 +7,15 @@
                 <table border="3" id="profildaten" class="table-striped">
                     <tr>
                         <td>Benutzername </td>
-                        <td> aktueller name aus dem Objekt</td>
+                        @if(user.getName() != null){
+                        <td>  @(user.getName()) </td>
+                        }
                     </tr>
                     <tr>
                         <td>E-mail</td>
-                        <td>aktuelle Email des Objekts</td>
+                        @if (user.getEmail() != null){
+                        <td> @(user.getEmail()) </td>
+                        }
                     </tr>
                 </table>
             </div>
