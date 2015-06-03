@@ -55,6 +55,10 @@ public class
         this.passwort = passwort;
     }
 
+    public String getPasswort() {
+        return passwort;
+    }
+
     public void changePasswort(String altpw, String neupw, String neuwiederholung){//beispielmethode
         if(altpw==passwort){
             if(neupw==neuwiederholung){

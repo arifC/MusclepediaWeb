@@ -17,20 +17,21 @@ import java.util.UUID;
 
 public class Application extends Controller {
 
+    public static Benutzer loggedIn = null;
+
     public static Result login(){return ok(login.render());
     }
 
     public static Result start() {
-        Benutzer loggedIn = null;
         boolean treffer = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         List<Benutzer> users = Ebean.find(models.Benutzer.class).findList();
         for(Benutzer user : users){
             System.out.println(user.getName());
             System.out.println(dynamicForm.get("username"));
-            String db_name = user.getName();
-            String logInName = dynamicForm.get("username");
-            if(db_name.matches(logInName)){
+            String dbUserPassword = user.getPasswort();
+            String logInPassword = verschluesseln(dynamicForm.get("passwort"));
+            if(dbUserPassword.matches(logInPassword)){
                 loggedIn = user;
                 treffer = true;
             }
@@ -62,9 +63,7 @@ public class Application extends Controller {
     public static Result kontakt(){return ok(kontakt.render());
     }
     public static Result profil(){
-
-        Benutzer user = new Benutzer("Zink", "test@mail.com", "passwort");
-        return ok(profil.render(user));
+        return ok(profil.render(loggedIn));
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
     }
@@ -106,5 +105,9 @@ public class Application extends Controller {
                 result ="konstanz";
         }
         return ok(result);
+    }
+
+    public static Result home() {
+        return ok(home.render(loggedIn));
     }
 }
