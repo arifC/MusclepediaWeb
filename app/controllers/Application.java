@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.Ebean;
 import models.Benutzer;
+import models.Uebung;
 import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.*;
@@ -109,5 +110,27 @@ public class Application extends Controller {
 
     public static Result home() {
         return ok(home.render(loggedIn));
+    }
+
+    public static Result UebungHinzufuegen(){
+        Uebung beispiel = new Uebung("szcurls");
+        Ebean.save(beispiel);
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        List<Uebung> uebungen = Ebean.find(models.Uebung.class).findList();
+        String auswahl = dynamicForm.get("auswahl");
+        Uebung uebungsauswahl = null;
+        for(Uebung u : uebungen){
+            System.out.println(u.getName());
+            if(u.getName().equals(auswahl)){
+                uebungsauswahl = u;
+                System.out.print("JAAA");
+                System.out.print(loggedIn);
+            }
+        }
+
+        loggedIn.addToPlan(uebungsauswahl);
+        return redirect("/");
+
+
     }
 }

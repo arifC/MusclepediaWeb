@@ -31,5 +31,12 @@ public class Uebung {
         this.schwierigkeit=schwierigkeit;
     }
 
+    public Uebung(String name){
+        this.name=name;
+    }
 
+
+    public String getName() {
+        return name;
+    }
 }

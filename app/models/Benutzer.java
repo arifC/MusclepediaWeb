@@ -14,8 +14,8 @@ public class
         Benutzer{
     @Id
     private UUID benutzer_id;
-
-
+    @ManyToMany
+    public Uebung meineUebung;
     @Constraints.Required
     private String name;
     @Constraints.Required
@@ -68,6 +68,10 @@ public class
 
         }else
             System.out.println("Passwort falsch");
+    }
+
+    public Trainingsplan getMyPlan() {
+        return myPlan;
     }
 
     public String getName() {

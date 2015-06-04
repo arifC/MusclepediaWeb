@@ -20,6 +20,7 @@ GET         /plaene_anfaenger            controllers.Application.plaene_anfaenge
 GET         /plaene_fortgesch            controllers.Application.plaene_fortgesch()
 GET         /plaene_profi                controllers.Application.plaene_profi()
 POST        /benutzer_anlegen            controllers.Application.benutzer_anlegen()
+GET         /UebungHinzufuegen           controllers.Application.UebungHinzufuegen()
 
 #AJAX
 GET         /searchStudio                controllers.Application.searchStudio(value)
