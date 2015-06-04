@@ -3,33 +3,27 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import play.data.format.*;
-import play.data.validation.*;
-import org.springframework.context.annotation.Conditional;
-import play.data.validation.*;
-
 import javax.persistence.*;
-import javax.validation.Constraint;
 
 import java.util.UUID;
 
 @Entity
 public class Studio {
     @Id
-    private UUID id;
+    private UUID studio_id;
     private String plz;
     private String ort;
     private String strasse;
     private String name;
 
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Bewertung> bewertungen = new ArrayList<Bewertung>();
+    private List<Rating> ratings = new ArrayList<Rating>();
 
-    private double gesamtBewertung;
-    private double gesamtAusstattung = 0;
-    private double gesamtLage = 0;
-    private double gesamtPreis = 0;
-    private double gesamtService = 0;
+    private double totalRating;
+    private double totalFacilities = 0;
+    private double totalLocation = 0;
+    private double totalPrice = 0;
+    private double totalService = 0;
 
     public Studio(String name, String strasse, String plz, String ort){
         this.name = name;
@@ -38,29 +32,29 @@ public class Studio {
         this.ort = ort;
     }
 
-    public void berechneDurchschnitt(){
+    public void calcAverage(){
         double counter = 0;
-        for(Bewertung bw : bewertungen){
-            this.gesamtAusstattung += bw.getAusstattung();
-            this.gesamtLage += bw.getLage();
-            this.gesamtPreis += bw.getPreis();
-            this.gesamtService += bw.getService();
+        for(Rating rating : ratings){
+            this.totalFacilities += rating.getFacilities();
+            this.totalLocation += rating.getLocation();
+            this.totalPrice += rating.getPrice();
+            this.totalService += rating.getService();
             counter ++;
         }
-        this.gesamtAusstattung /= counter;
-        this.gesamtLage /= counter;
-        this.gesamtPreis /= counter;
-        this.gesamtService /= counter;
-        this.gesamtBewertung = (gesamtAusstattung + gesamtLage + gesamtPreis + gesamtService) / 4;
+        this.totalFacilities /= counter;
+        this.totalLocation /= counter;
+        this.totalPrice /= counter;
+        this.totalService /= counter;
+        this.totalRating = (totalFacilities + totalLocation + totalPrice + totalService) / 4;
     }
 
-    public void addBewertung(Bewertung bw){
-        bewertungen.add(bw);
-        berechneDurchschnitt();
+    public void addBewertung(Rating bw){
+        ratings.add(bw);
+        calcAverage();
     }
 
-    public Bewertung getBewertung(int i){
-        return bewertungen.get(i);
+    public Rating getBewertung(int i){
+        return ratings.get(i);
     }
 
     public String getOrt() {
@@ -95,23 +89,23 @@ public class Studio {
         this.name = name;
     }
 
-    public double getGesamtService() {
-        return gesamtService;
+    public double getTotalService() {
+        return totalService;
     }
 
-    public double getGesamtPreis() {
-        return gesamtPreis;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public double getGesamtLage() {
-        return gesamtLage;
+    public double getTotalLocation() {
+        return totalLocation;
     }
 
-    public double getGesamtAusstattung() {
-        return gesamtAusstattung;
+    public double getTotalFacilities() {
+        return totalFacilities;
     }
 
-    public double getGesamtBewertung() {
-        return gesamtBewertung;
+    public double getTotalRating() {
+        return totalRating;
     }
 }

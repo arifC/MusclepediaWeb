@@ -17,17 +17,17 @@ create table benutzer (
 create table bewertung (
   bewertung_id              varchar(40) not null,
   studio_id                 varchar(40) not null,
-  ausstattung               double,
+  facilities               double,
   service                   double,
-  preis                     double,
-  lage                      double,
+  price                     double,
+  location                      double,
   constraint pk_bewertung primary key (bewertung_id))
 ;
 
-create table gewicht (
+create table weight (
   gewicht_id                varchar(40) not null,
-  gewicht                   double,
-  datum                     datetime,
+  weight                   double,
+  date                     datetime,
   datum_text                varchar(255),
   constraint pk_gewicht primary key (gewicht_id))
 ;
@@ -48,7 +48,7 @@ create table studio (
 
 create table trainingsplan (
   plan_id                   varchar(40) not null,
-  typ                       varchar(255),
+  type                       varchar(255),
   constraint pk_trainingsplan primary key (plan_id))
 ;
 
@@ -77,7 +77,7 @@ drop table benutzer;
 
 drop table bewertung;
 
-drop table gewicht;
+drop table weight;
 
 drop table studio;
 

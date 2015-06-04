@@ -1,8 +1,8 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
-import models.Benutzer;
-import models.Uebung;
+import models.Exercise;
+import models.User;
 import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.*;
@@ -18,33 +18,38 @@ import java.util.UUID;
 
 public class Application extends Controller {
 
-    public static Benutzer loggedIn = null;
+    public static User loggedInUser = null;
 
     public static Result login(){return ok(login.render());
     }
 
     public static Result start() {
-        boolean treffer = false;
+        //sobald der passende User gefunden ist, ist foundUser true
+        boolean foundUser = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
+        
         //Kurze Vereinfachung für debug
         if(dynamicForm.get("username").matches("admin")){
-            loggedIn = new Benutzer("admin", "nomail", "admin");
-            return ok(home.render(loggedIn));
+            loggedInUser = new User("admin", "nomail", "admin");
+            return ok(home.render(loggedInUser));
         }
-        List<Benutzer> users = Ebean.find(models.Benutzer.class).findList();
-        for(Benutzer user : users){
-
-            String dbUserPassword = user.getPasswort();
+        //liste aller User
+        List<User> allUsers = Ebean.find(User.class).findList();
+        for(User user : allUsers){
+            //User aus db
+            String dbUserPassword = user.getPassword();
             String dbUserName = user.getName();
+            //User aus Anfrage
             String logInPassword = verschluesseln(dynamicForm.get("passwort"));
             String logInUserName = dynamicForm.get("username");
+
             if(dbUserPassword.matches(logInPassword) && (dbUserName.matches(logInUserName))){
-                loggedIn = user;
-                treffer = true;
+                loggedInUser = user;
+                foundUser = true;
             }
         }
-        if (treffer){
-            return ok(home.render(loggedIn));
+        if (foundUser){
+            return ok(home.render(loggedInUser));
         }
         else{
             return redirect("/");
@@ -65,12 +70,12 @@ public class Application extends Controller {
     }
     public static Result bauch() {return ok(uebungen_bauch.render());
     }
-    public static Result impress() {return ok(impressum.render());
+    public static Result impressum() {return ok(impressum.render());
     }
     public static Result kontakt(){return ok(kontakt.render());
     }
     public static Result profil(){
-        return ok(profil.render(loggedIn));
+        return ok(profil.render(loggedInUser));
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
     }
@@ -92,12 +97,12 @@ public class Application extends Controller {
         return result;
 
     }
-    public static Result benutzer_anlegen(){
+    public static Result createUser(){
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             DynamicForm dynamicForm = Form.form().bindFromRequest();
             UUID id = UUID.randomUUID();
-            Benutzer user = new Benutzer(dynamicForm.get("benutzername"),dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
+            User user = new User(dynamicForm.get("benutzername"),dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
             Ebean.save(user);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -115,26 +120,26 @@ public class Application extends Controller {
     }
 
     public static Result home() {
-        return ok(home.render(loggedIn));
+        return ok(home.render(loggedInUser));
     }
 
-    public static Result UebungHinzufuegen(){
-        Uebung beispiel = new Uebung("szcurls");
+    public static Result addExercise(){
+        Exercise beispiel = new Exercise("szcurls");
         Ebean.save(beispiel);
         DynamicForm dynamicForm = Form.form().bindFromRequest();
-        List<Uebung> uebungen = Ebean.find(models.Uebung.class).findList();
+        List<Exercise> uebungen = Ebean.find(Exercise.class).findList();
         String auswahl = dynamicForm.get("auswahl");
-        Uebung uebungsauswahl = null;
-        for(Uebung u : uebungen){
+        Exercise uebungsauswahl = null;
+        for(Exercise u : uebungen){
             System.out.println(u.getName());
             if(u.getName().equals(auswahl)){
                 uebungsauswahl = u;
                 System.out.print("JAAA");
-                System.out.print(loggedIn);
+                System.out.print(loggedInUser);
             }
         }
 
-        //loggedIn.addToPlan(uebungsauswahl);
+        //loggedInUser.addToPlan(uebungsauswahl);
         return redirect("/");
 
 
