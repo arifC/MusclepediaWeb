@@ -26,13 +26,19 @@ public class Application extends Controller {
     public static Result start() {
         boolean treffer = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
+        //Kurze Vereinfachung für debug
+        if(dynamicForm.get("username").matches("admin")){
+            loggedIn = new Benutzer("admin", "nomail", "admin");
+            return ok(home.render(loggedIn));
+        }
         List<Benutzer> users = Ebean.find(models.Benutzer.class).findList();
         for(Benutzer user : users){
-            System.out.println(user.getName());
-            System.out.println(dynamicForm.get("username"));
+
             String dbUserPassword = user.getPasswort();
+            String dbUserName = user.getName();
             String logInPassword = verschluesseln(dynamicForm.get("passwort"));
-            if(dbUserPassword.matches(logInPassword)){
+            String logInUserName = dynamicForm.get("username");
+            if(dbUserPassword.matches(logInPassword) && (dbUserName.matches(logInUserName))){
                 loggedIn = user;
                 treffer = true;
             }
@@ -128,7 +134,7 @@ public class Application extends Controller {
             }
         }
 
-        loggedIn.addToPlan(uebungsauswahl);
+        //loggedIn.addToPlan(uebungsauswahl);
         return redirect("/");
 
 

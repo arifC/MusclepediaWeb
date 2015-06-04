@@ -20,10 +20,12 @@
             </div>
         </div>
     </div>
-    <div> @if(user.showPlan() != null){
+    @if(user.showPlan() != null){
+        <div>
              @user.showPlan();
+        </div>
         }
-    </div>
+
 
     <form method="post">
         <p> Altes Passwort:     <input type="password" id="pwalt"></p>

@@ -13,17 +13,18 @@ import java.util.UUID;
 @Entity
 public class Trainingsplan {
     @Id
-    public UUID Plan_id;
+    public UUID plan_id;
     @Constraints.Required
     private String typ;
 
-    @ManyToMany(mappedBy="Trainingsplan")
-    private SortedMap<Integer, Uebung> uebungsliste = new TreeMap<Integer, Uebung>();
+    /*@ManyToMany(mappedBy="Trainingsplan")
+    private SortedMap<Integer, Uebung> uebungsliste = new TreeMap<Integer, Uebung>();*/
     public Trainingsplan(String typ){
+        this.plan_id = UUID.randomUUID();
         this.typ=typ;
     }
 
-    public void addUebung(Uebung u){
+    /*public void addUebung(Uebung u){
         uebungsliste.put(u.uebung_id,u);
     }
     public void deleteUebung(Uebung u){
@@ -31,6 +32,9 @@ public class Trainingsplan {
     }
     public Collection<Uebung> showPlan(){
         return uebungsliste.values();
-    }
+    }*/
 
+    public String getTyp() {
+        return typ;
+    }
 }

@@ -32,17 +32,17 @@ public class
 
     }
     @OneToOne
-    private Trainingsplan myPlan= new Trainingsplan("Custom Plan");
+    private Trainingsplan myPlan;
 
-    public void addToPlan(Uebung u){
+    /*public void addToPlan(Uebung u){
         myPlan.addUebung(u);
     }
     public void deleteFromPlan(Uebung u){
         myPlan.deleteUebung(u);
-    }
-    public void showPlan(){
+    }*/
+    public String showPlan(){
         //wie sollen wir die hier ausgeben??
-        myPlan.showPlan();
+        return myPlan.getTyp();
     }
     public String getEmail(){
         return email;
@@ -53,6 +53,7 @@ public class
         this.name = name;
         this.email = mail;
         this.passwort = passwort;
+        this.myPlan = new Trainingsplan("testPLan");
     }
 
     public String getPasswort() {
