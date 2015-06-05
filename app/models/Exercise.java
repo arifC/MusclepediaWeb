@@ -6,6 +6,8 @@ import play.data.validation.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 @Entity
 public class Exercise {
@@ -13,6 +15,9 @@ public class Exercise {
     public int exercise_id;
     @Constraints.Required
     private String name;
+
+    @ManyToMany(mappedBy = "uebungsliste")
+    private List<Plan> uebungen;
 
     private List<Muscle> muskeln = new ArrayList<Muscle>();
     @Constraints.Required
@@ -25,6 +30,11 @@ public class Exercise {
         this.muskeln.add(muskel);
         this.beschreibung = beschreibung;
         this.schwierigkeit=schwierigkeit;
+        this.uebungen = new ArrayList<Plan>();
+    }
+
+    public String getBeschreibung() {
+        return beschreibung;
     }
 
     public Exercise(String name){

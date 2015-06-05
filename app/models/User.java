@@ -1,19 +1,19 @@
 package models;
 
+import com.avaje.ebean.Ebean;
 import play.data.validation.*;
 
 import javax.persistence.*;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 
 @Entity
-public class
-        User {
+public class User {
     @Id
     private UUID benutzer_id;
-    @ManyToMany
-    public Exercise meineUebung;
     @Constraints.Required
     private String name;
     @Constraints.Required
@@ -22,25 +22,19 @@ public class
     private String password;
     @ManyToOne
     private Studio studio;
-    @Constraints.Required
-    private String test;
     @OneToMany
     private Weight weight;
-    public void addWeight(){
-
-    }
     @OneToOne
     private Plan myPlan;
 
-    /*public void addToPlan(Exercise u){
+    public void addToPlan(Exercise u){
         myPlan.addUebung(u);
     }
     public void deleteFromPlan(Exercise u){
         myPlan.deleteUebung(u);
-    }*/
-    public String showPlan(){
-        //wie sollen wir die hier ausgeben??
-        return myPlan.getType();
+    }
+    public List<Exercise> showPlan(){
+        return myPlan.showPlan();
     }
     public String getEmail(){
         return email;
@@ -51,7 +45,8 @@ public class
         this.name = name;
         this.email = mail;
         this.password = passwort;
-        this.myPlan = new Plan("testPLan");
+        this.myPlan = new Plan("testPlan");
+        Ebean.save(this.myPlan);
     }
 
     public String getPassword() {

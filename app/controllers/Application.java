@@ -31,6 +31,7 @@ public class Application extends Controller {
         //Kurze Vereinfachung für debug
         if(dynamicForm.get("username").matches("admin")){
             loggedInUser = new User("admin", "nomail", "admin");
+            Ebean.save(loggedInUser);
             return ok(home.render(loggedInUser));
         }
         //liste aller User
@@ -139,9 +140,7 @@ public class Application extends Controller {
             }
         }
 
-        //loggedInUser.addToPlan(uebungsauswahl);
-        return redirect("/");
-
-
+        loggedInUser.addToPlan(uebungsauswahl);
+        return ok(home.render(loggedInUser));
     }
 }
