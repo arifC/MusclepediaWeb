@@ -4,7 +4,6 @@
 
 # Home page
 GET         /                            controllers.Application.login()
-GET         /start                       controllers.Application.start()
 GET         /home                        controllers.Application.home()
 GET         /help                        controllers.Application.help()
 GET         /uebungen_oberkoerper        controllers.Application.oberkoerper()
@@ -19,8 +18,9 @@ GET         /profil                      controllers.Application.profil()
 GET         /plaene_anfaenger            controllers.Application.plaene_anfaenger()
 GET         /plaene_fortgesch            controllers.Application.plaene_fortgesch()
 GET         /plaene_profi                controllers.Application.plaene_profi()
-POST        /createUser            controllers.Application.createUser()
 GET         /addExercise controllers.Application.addExercise()
+POST        /createUser            controllers.Application.createUser()
+POST         /start                       controllers.Application.start()
 
 #AJAX
 GET         /searchStudio                controllers.Application.searchStudio(value)

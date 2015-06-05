@@ -25,6 +25,10 @@ public class Exercise {
     @Constraints.Required
     private String schwierigkeit;
 
+    public Exercise(String name){
+        this.name=name;
+    }
+
     public Exercise(String name, Muscle muskel, String beschreibung, String schwierigkeit){
         this.name=name;
         this.muskeln.add(muskel);
@@ -35,10 +39,6 @@ public class Exercise {
 
     public String getBeschreibung() {
         return beschreibung;
-    }
-
-    public Exercise(String name){
-        this.name=name;
     }
 
 
