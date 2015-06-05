@@ -28,14 +28,14 @@
           <td>Hier kommt die Beschreibung</td>
           <td><img src="@routes.Assets.at("images/bank.jpg")" height="150" width="150" alt="bank2.jpg" class="img-thumbnail" onmouseover="javascript:bigImg(this)" onmouseout="javascript:normalImg(this)"/></td>
           <td>Fortgeschritten</td>
-          <td> <input class="btn btn-success" type="button" value="add to plan" onclick="javascript:addToPlan()"> </td>
+          <td><form method="GET" action="/addExercise"> <input class="btn btn-success" type="submit" value="add to plan"><input type="hidden" name="auswahl" value="hammercurls"></form> </td>
         </tr>
         <tr>
           <td>Klimmzüge</td>
           <td>Hier kommt die Beschreibung</td>
           <td><img src="@routes.Assets.at("images/bank.jpg")" height="150" width="150" alt="bank.jpg" class="img-thumbnail" onmouseover="javascript:bigImg(this)" onmouseout="javascript:normalImg(this)"/></td>
           <td>Fortgeschritten</td>
-          <td> <input class="btn btn-success" type="button" value="add to plan" onclick="javascript:addToPlan()"> </td>
+          <td> <form method="GET" action="/addExercise"><input class="btn btn-success" type="submit" value="add to plan"><input type="hidden" name="auswahl" value="klimmzüge"></form> </td>
         </tr>
       </tbody>
     </table>

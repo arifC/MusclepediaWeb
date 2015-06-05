@@ -1,43 +1,54 @@
 @(user: models.User)
 @start("Musclepedia"){
-    <div role="tabpanel" class="tab-pane">
-        <div class="row text-center">
-            <div class="col-md-8" id="profil">
-                <table border="3" id="profildaten" class="table-striped">
-                    <tr>
-                        <td>Benutzername </td>
-                        @if(user.getName() != null){
-                        <td>  @(user.getName()) </td>
-                        }
-                    </tr>
-                    <tr>
-                        <td>E-mail</td>
-                        @if(user.getEmail() != null){
-                        <td> @(user.getEmail()) </td>
-                        }
-                    </tr>
-                </table>
+
+    <div>
+        <div class="col-md-6">
+            <div role="tabpanel" class="tab-pane">
+                <div class="row text-center">
+                    <div class="col-md-8" id="profil">
+                        <table border="2" id="profildaten" class="table table-striped">
+                            <th class="text-center"> Benutzername </th> <th  class="text-center"> E-Mail </th>
+                            <tr>  @if(user.getName() != null){
+                                <td>  @(user.getName()) </td>
+                                 }
+                                @if(user.getEmail() != null){
+                                <td> @(user.getEmail()) </td>
+                                }
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    @if(user.showPlan() != null){
-        <div>
-            <table border="2">
-                <th>Übungsname</th><th>Beschreibung</th>
-                @for(e <- user.showPlan()){
-                    <tr><td>@e.getName</td><td>@e.getBeschreibung</td></tr>
-                }
-            </table>
+        <div class="col-md-6">
+            <form method="post" class="form-group">
+                <label> Altes Passwort </label>
+                <input class="form-control" type="password" id="pwalt" placeholder="Enter old pw">
+                <label> Neues Passwort </label>
+                <input class="form-control" type="password" id="pwneu" placeholder="Enter new pw">
+                <label> Neues Passwort wiederholen </label>
+                <input class="form-control" type="password" id="pwwieder" placeholder="repeat new pw">
+                <br>
+                <button class="btn btn-primary">Passwort ändern </button>
+            </form>
         </div>
-        }
+    </div>
 
 
-    <form method="post">
-        <p> Altes Passwort:     <input type="password" id="pwalt"></p>
-        <p> Neues Passwort:     <input type="password" id="pwneu"></p>
-        <p> Passwort wiederholen<input type="password" id="pwwieder"></p>
-        <button>Passwort ändern </button>
-        <p>Neue Email: <input type="email"> <button> Email ändern</button>  </p>
+    <div class="col-md-8 col-md-offset-2">
+        @if(user.showPlan() != null){
+            <div  class="text-center">
+                <table border="2" class="table table-striped">
+                    <caption> <h3>Mein erstellter Trainigsplan</h3> </caption>
+                    <th  class="text-center">Übungsname</th><th  class="text-center">Beschreibung</th>
+                    @for(e <- user.showPlan()){
+                        <tr><td>@e.getName</td><td>@e.getBeschreibung</td></tr>
+                    }
+                </table>
+            </div>
+            }
+    </div>
 
-    </form>
+
+
 }
