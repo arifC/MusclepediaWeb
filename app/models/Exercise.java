@@ -1,38 +1,44 @@
 package models;
 
 
-import play.data.format.*;
-import play.db.ebean.*;
 import javax.persistence.*;
 import play.data.validation.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeMap;
 
 @Entity
-public class Uebung {
+public class Exercise {
     @Id
-    public int uebung_id;
+    public int exercise_id;
     @Constraints.Required
     private String name;
 
-    private List<Muskel> muskeln = new ArrayList<Muskel>();
+    @ManyToMany(mappedBy = "uebungsliste")
+    private List<Plan> uebungen;
+
+    private List<Muscle> muskeln = new ArrayList<Muscle>();
     @Constraints.Required
     private String beschreibung;
     @Constraints.Required
     private String schwierigkeit;
 
-    public Uebung(String name, Muskel muskel, String beschreibung, String schwierigkeit){
+    public Exercise(String name){
+        this.name=name;
+    }
+
+    public Exercise(String name, Muscle muskel, String beschreibung, String schwierigkeit){
         this.name=name;
         this.muskeln.add(muskel);
         this.beschreibung = beschreibung;
         this.schwierigkeit=schwierigkeit;
+        this.uebungen = new ArrayList<Plan>();
     }
 
-    public Uebung(String name){
-        this.name=name;
+    public String getBeschreibung() {
+        return beschreibung;
     }
 
 

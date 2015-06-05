@@ -1,4 +1,4 @@
-@(user: models.Benutzer)
+@(user: models.User)
 @start("Musclepedia"){
     <div role="tabpanel" class="tab-pane">
         <div class="row text-center">
@@ -22,7 +22,12 @@
     </div>
     @if(user.showPlan() != null){
         <div>
-             @user.showPlan();
+            <table border="2">
+                <th>Übungsname</th><th>Beschreibung</th>
+                @for(e <- user.showPlan()){
+                    <tr><td>@e.getName</td><td>@e.getBeschreibung</td></tr>
+                }
+            </table>
         </div>
         }
 

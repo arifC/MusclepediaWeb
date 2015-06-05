@@ -9,7 +9,7 @@
                     <li><a href="#register" role="tab" data-toggle="tab">Registrieren</a></li>
                 </ul>
                 <div role="tabpanel" class="tab-pane active" id="login">
-                    <form method="get" action="/start">
+                    <form method="post" action="/start">
                         <div class="form-group">
                             <h3>Login</h3>
                             <label for="logName">Benutzername</label>
@@ -24,7 +24,7 @@
                     </form>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="register">
-                    <form method="post" action="/benutzer_anlegen" name="regForm" onsubmit="return validateForm() ">
+                    <form method="post" action="/createUser" name="regForm" onsubmit="return validateForm() ">
                         <div class="form-group">
                             <h3>Registrieren</h3>
                             <label for="regName">Benutzername</label>
@@ -46,29 +46,27 @@
             </div>
 
                 <div class="col-md-4 col-md-offset-1">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <div id="carousel-example-generic" class="carousel slide slideLogIn" data-ride="carousel">
                             <!-- Indicators -->
                         <ol class="carousel-indicators">
                             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                         </ol>
 
                             <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img class="img-circle" src="@routes.Assets.at("images/login_bild.jpg")" alt="...">
+                                <img class="slideLogIn" src="@routes.Assets.at("images/login_bild.jpg")" alt="...">
                                 <div class="carousel-caption">
                                     <h4>Übungslehre</h4>
                                 </div>
                             </div>
                             <div class="item">
-                                <img class="img-circle" src="@routes.Assets.at("images/login_slide.jpg")" alt="...">
+                                <img src="@routes.Assets.at("images/login_slide.jpg")" alt="...">
                                 <div class="carousel-caption">
                                     <h4>Krafttraining</h4>
                                 </div>
                             </div>
-                            ...
                         </div>
 
                             <!-- Controls -->

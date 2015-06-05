@@ -19,7 +19,11 @@
     <body>
         <header class="text-center">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2" id="login_img">
+                <div class="col-md-2">
+
+                    <img id="testsieger" src="@routes.Assets.at("images/testSieger.jpg")"/>
+                </div>
+                <div class="col-md-8" id="login_img">
                     <h1>Musclepedia</h1>
                     <h2>Starkes Wissen rund um Fitness</h2>
                 </div>
@@ -49,7 +53,7 @@
                     <ul class="nav nav-tabs">
                         <li id="start"><a href="/home">Home</a></li>
                         <li class="dropdown" id="uebungen">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Übungen<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Uebungen<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li role="presentation"> <a role="menuitem" href="/uebungen_oberkoerper"> Oberkörper</a> </li>
                                 <li role="presentation"> <a role="menuitem" href="/uebungen_arme"> Arme </a></li>
@@ -58,7 +62,7 @@
                             </ul>
                         </li>
                         <li class="dropdown" id="plaene">
-                            <a hsref="#" class="dropdown-toggle" data-toggle="dropdown">Pläne <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pläne <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li role="presentation"> <a role="menuitem" href="/plaene_anfaenger">Anfänger</a></li>
                                 <li role="presentation"> <a role="menuitem" href="/plaene_fortgesch">Fortgeschritten </a></li>

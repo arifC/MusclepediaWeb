@@ -1,4 +1,4 @@
-@(user: models.Benutzer)
+@(user: models.User)
 @start("Musclepedia"){
 <div role="tabpanel" class="tab-pane">
     <div class="row">
@@ -6,7 +6,7 @@
             @if(user.getName() != null){
                         <p>Auf dieser Seite lernen Sie alle rund um das Thema Fitness.
                             Lernen Sie sowhl neue Übungen, als auch Trainingspläne kennen, oder stellen
-                            Sie sich ganz einfach Ihren individuellen Trainingsplan zusammen.</p>
+                            Sie sich ganz einfach Ihren individuellen Plan zusammen.</p>
                         <br/>
                         <h3>Eingeloggt als:
                             @(user.getName())
