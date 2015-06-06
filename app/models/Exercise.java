@@ -2,6 +2,8 @@ package models;
 
 
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
 import play.data.validation.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
@@ -45,4 +47,7 @@ public class Exercise {
     public String getName() {
         return name;
     }
+
+
+
 }

@@ -132,15 +132,26 @@ public class Application extends Controller {
         String auswahl = dynamicForm.get("auswahl");
         Exercise uebungsauswahl = null;
         for(Exercise u : uebungen){
-            System.out.println(u.getName());
             if(u.getName().equals(auswahl)){
                 uebungsauswahl = u;
-                System.out.print("JAAA");
-                System.out.print(loggedInUser);
             }
         }
 
         loggedInUser.addToPlan(uebungsauswahl);
         return ok(home.render(loggedInUser));
+    }
+
+    public static Result deleteExercise(){
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        List<Exercise> uebungen = Ebean.find(Exercise.class).findList();
+        String auswahl = dynamicForm.get("auswahl");
+        Exercise uebungsauswahl = null;
+        for(Exercise u : uebungen) {
+            if (u.getName().equals(auswahl)) {
+                uebungsauswahl = u;
+            }
+        }
+        loggedInUser.deleteFromPlan(uebungsauswahl);
+        return ok(profil.render(loggedInUser));
     }
 }

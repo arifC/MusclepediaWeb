@@ -40,9 +40,9 @@
             <div  class="text-center">
                 <table border="2" class="table table-striped">
                     <caption> <h3>Mein erstellter Trainigsplan</h3> </caption>
-                    <th  class="text-center">Übungsname</th><th  class="text-center">Beschreibung</th>
+                    <th  class="text-center">Übungsname</th><th  class="text-center">Beschreibung</th><th></th>
                     @for(e <- user.showPlan()){
-                        <tr><td>@e.getName</td><td>@e.getBeschreibung</td></tr>
+                        <tr><td>@e.getName</td><td>@e.getBeschreibung</td><td> <form action="/deleteExercise" method="get"><input class="btn btn-danger" type="submit" value="löschen"><input type="hidden" name="auswahl" value="@e.getName"></form> </td></tr>
                     }
                 </table>
             </div>

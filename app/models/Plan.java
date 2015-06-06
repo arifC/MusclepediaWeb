@@ -30,7 +30,9 @@ public class Plan {
         Ebean.save(this);
     }
     public void deleteUebung(Exercise u){
+
         uebungsliste.remove(u);
+        Ebean.save(this);
     }
     public List<Exercise> showPlan(){
         return uebungsliste;
