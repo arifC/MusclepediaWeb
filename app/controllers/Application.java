@@ -8,6 +8,7 @@ import play.mvc.*;
 import views.html.*;
 import play.data.Form;
 
+import javax.swing.*;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -53,6 +54,9 @@ public class Application extends Controller {
             return ok(home.render(loggedInUser));
         }
         else{
+            JFrame frame = new JFrame("Nachricht");
+
+            JOptionPane.showMessageDialog(frame,"Username oder Passwort falsch");
             return redirect("/");
         }
     }
