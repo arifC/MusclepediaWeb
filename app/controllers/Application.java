@@ -55,7 +55,6 @@ public class Application extends Controller {
         }
         else{
             JFrame frame = new JFrame("Nachricht");
-
             JOptionPane.showMessageDialog(frame,"Username oder Passwort falsch");
             return redirect("/");
         }
@@ -103,16 +102,41 @@ public class Application extends Controller {
 
     }
     public static Result createUser(){
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            DynamicForm dynamicForm = Form.form().bindFromRequest();
-            UUID id = UUID.randomUUID();
-            User user = new User(dynamicForm.get("benutzername"),dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
-            Ebean.save(user);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-    }
-        return ok(login.render());
+        boolean usernameInUse = false;
+        boolean emailInUse  = false;
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        List<User> user2 = Ebean.find(User.class).findList();
+        String username = dynamicForm.get("benutzername");
+        String email = dynamicForm.get("mail");
+        for(User u : user2) {
+            if (u.getName().equals(username)) {
+                usernameInUse = true;
+            }
+            if (u.getEmail().equals(email)) {
+                emailInUse = true;
+            }
+        }
+
+        if(!usernameInUse && !emailInUse) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                UUID id = UUID.randomUUID();
+                User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
+                Ebean.save(user);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            return ok(login.render());
+        }else{
+            JFrame frame = new JFrame("Nachricht");
+            if(usernameInUse){
+                JOptionPane.showMessageDialog(frame,"Username ist schon vergeben");
+            }
+            if(emailInUse){
+                JOptionPane.showMessageDialog(frame,"Diese Email-Adresse ist schon registriert");
+            }
+            return ok(login.render());
+        }
     }
 
     public static Result searchStudio(String studio) {
