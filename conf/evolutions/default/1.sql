@@ -19,17 +19,19 @@ create table plan (
 
 create table rating (
   rating_id                 varchar(40) not null,
-  studio_studio_id          varchar(40) not null,
   facilities                double,
   service                   double,
   price                     double,
   location                  double,
+  studio_studio_id          varchar(40),
+  user_benutzer_id          varchar(40),
+  value                     integer,
   constraint pk_rating primary key (rating_id))
 ;
 
 create table studio (
   studio_id                 varchar(40) not null,
-  plz                       varchar(255),
+  plz                       integer,
   ort                       varchar(255),
   strasse                   varchar(255),
   name                      varchar(255),
@@ -67,10 +69,12 @@ create table plan_exercise (
 ;
 alter table rating add constraint fk_rating_studio_1 foreign key (studio_studio_id) references studio (studio_id) on delete restrict on update restrict;
 create index ix_rating_studio_1 on rating (studio_studio_id);
-alter table user add constraint fk_user_studio_2 foreign key (studio_studio_id) references studio (studio_id) on delete restrict on update restrict;
-create index ix_user_studio_2 on user (studio_studio_id);
-alter table user add constraint fk_user_myPlan_3 foreign key (my_plan_plan_id) references plan (plan_id) on delete restrict on update restrict;
-create index ix_user_myPlan_3 on user (my_plan_plan_id);
+alter table rating add constraint fk_rating_user_2 foreign key (user_benutzer_id) references user (benutzer_id) on delete restrict on update restrict;
+create index ix_rating_user_2 on rating (user_benutzer_id);
+alter table user add constraint fk_user_studio_3 foreign key (studio_studio_id) references studio (studio_id) on delete restrict on update restrict;
+create index ix_user_studio_3 on user (studio_studio_id);
+alter table user add constraint fk_user_myPlan_4 foreign key (my_plan_plan_id) references plan (plan_id) on delete restrict on update restrict;
+create index ix_user_myPlan_4 on user (my_plan_plan_id);
 
 
 

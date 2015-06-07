@@ -19,7 +19,8 @@ GET         /plaene_anfaenger            controllers.Application.plaene_anfaenge
 GET         /plaene_fortgesch            controllers.Application.plaene_fortgesch()
 GET         /plaene_profi                controllers.Application.plaene_profi()
 GET         /addExercise                 controllers.Application.addExercise()
-GET         /deleteExercise             controllers.Application.deleteExercise()
+GET         /deleteExercise              controllers.Application.deleteExercise()
+GET         /rateStudio                  controllers.Application.rateStudio()
 POST        /createUser                  controllers.Application.createUser()
 POST        /start                       controllers.Application.start()
 

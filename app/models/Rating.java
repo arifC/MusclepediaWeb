@@ -18,12 +18,28 @@ public class Rating {
     private double price;
     @Constraints.Required
     private double location;
+    @OneToOne
+    private Studio studio;
+    @ManyToOne
+    private User user;
+    @Constraints.Required
+    private int value;
 
     public Rating(double facilities, double service, double price, double location){
         this.facilities = facilities;
         this.service = service;
         this.price = price;
         this.location = location;
+    }
+
+    public Rating(Studio studio, User user, int value){
+        this.studio = studio;
+        this.user = user;
+        this.value=value;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public double getFacilities() {

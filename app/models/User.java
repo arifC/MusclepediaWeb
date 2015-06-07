@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import play.data.validation.*;
 
 import javax.persistence.*;
+import javax.swing.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -70,5 +71,9 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public void rateStudio(Studio studio,Rating rating){
+        studio.addBewertung(rating);
     }
 }

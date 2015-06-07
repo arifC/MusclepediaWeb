@@ -1,9 +1,12 @@
 package models;
 
+import com.avaje.ebean.Ebean;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.swing.*;
 
 import java.util.UUID;
 
@@ -11,21 +14,22 @@ import java.util.UUID;
 public class Studio {
     @Id
     private UUID studio_id;
-    private String plz;
+    private int plz;
     private String ort;
     private String strasse;
     private String name;
 
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Rating> ratings = new ArrayList<Rating>();
+    private List<Rating> ratings;
 
-    private double totalRating;
+    private double totalRating = 0;
     private double totalFacilities = 0;
     private double totalLocation = 0;
     private double totalPrice = 0;
     private double totalService = 0;
 
-    public Studio(String name, String strasse, String plz, String ort){
+    public Studio(String name, String strasse, int plz, String ort){
+        ratings = new ArrayList<Rating>();
         this.name = name;
         this.strasse = strasse;
         this.plz = plz;
@@ -48,9 +52,23 @@ public class Studio {
         this.totalRating = (totalFacilities + totalLocation + totalPrice + totalService) / 4;
     }
 
+    public double calcAverage2(){
+        double counter = 0;
+        double summe=0;
+        for(Rating rating : ratings){
+            summe += rating.getValue();
+            counter++;
+        }
+        totalRating = summe;
+        return summe/counter;
+    }
     public void addBewertung(Rating bw){
         ratings.add(bw);
-        calcAverage();
+        Ebean.save(this);
+        calcAverage2();
+        JFrame frame = new JFrame("Nachricht");
+        JOptionPane.showMessageDialog(frame,bw.getValue());
+        JOptionPane.showMessageDialog(frame,this.getTotalRating());
     }
 
     public Rating getBewertung(int i){
@@ -65,11 +83,11 @@ public class Studio {
         this.ort = ort;
     }
 
-    public String getPlz() {
+    public int getPlz() {
         return plz;
     }
 
-    public void setPlz(String plz) {
+    public void setPlz(int plz) {
         this.plz = plz;
     }
 

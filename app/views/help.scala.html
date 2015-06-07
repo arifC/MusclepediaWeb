@@ -18,8 +18,8 @@
                     <div role="tabpanel" class="tab-pane active" id="bmire">
                         <h3>BMI Rechner </h3>
                         <p> ACHTUNG BMI kann nicht zwischen Muskeln und Fett unterscheiden! Daher soll man vorsichtig bei der Auswertung der Ergebnisse sein!</p>
-                        <p><input type="number" id="gewichtB" placeholder="150"/>Weight </p>
                         <p><input type="number" id="groesseB" placeholder="1.X"/>Größe </p>
+                        <p><input type="number" id="gewichtB" placeholder="in Kg (70.5)"/>Gewicht </p>
                         <select id="gesch">
                             <option value="männlich">männlich</option>
                             <option value="weiblich">weiblich</option>
@@ -29,10 +29,10 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="kalre">
                         <h3>Kalorienrechner</h3>
-                        <p>Weight:     <input type="number" id="gewichtK" placeholder="150"></p>
-                        <p>Größe in cm: <input type="number" id="groesseK" placeholder="175"></p>
-                        <p>Alter:       <input type="number" id="alter" placeholder="40"> </p>
-                        <p> Aktivitäten</p>
+                        <p> Größe:  <input type="number" id="groesseK" placeholder="1.X"></p>
+                        <p> Gewicht:     <input type="number" id="gewichtK" placeholder="in Kg (70.5)"></p>
+                        <p> Alter: <input type="number" id="alter" placeholder="in Jahren"></p>
+                        <p> Aktivitäten </p>
                         <select id="faktor">
                             <option value="1.2"> Nur sitzend oder liegend</option>
                             <option value="1.5"> sitzend kaum körperliche Aktivität</option>
@@ -40,7 +40,7 @@
                             <option value="1.9"> Hauptsächlich gehend und stehend</option>
                             <option value="2.2">Körperlich anstrengende Arbeit </option>
                         </select>
-                        <button onclick="javascript:berechneKal()">Rechne </button>
+                        <button onclick="javascript:berechneKal()">Berechnen </button>
                         <div id="kalerg"></div>
                     </div>
                 </div>

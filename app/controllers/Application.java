@@ -2,6 +2,8 @@ package controllers;
 
 import com.avaje.ebean.Ebean;
 import models.Exercise;
+import models.Rating;
+import models.Studio;
 import models.User;
 import play.data.DynamicForm;
 import play.mvc.*;
@@ -20,11 +22,14 @@ import java.util.UUID;
 public class Application extends Controller {
 
     public static User loggedInUser = null;
+    public static Studio konstanz = null;
 
     public static Result login(){return ok(login.render());
     }
 
     public static Result start() {
+        konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
+        Ebean.save(konstanz);
         //sobald der passende User gefunden ist, ist foundUser true
         boolean foundUser = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -66,7 +71,10 @@ public class Application extends Controller {
     }
     public static Result studios(){return ok(studios.render());
     }
-    public static Result knStudio(){return ok(studios_kn.render());
+    public static Result knStudio(){
+        //Form<Studio> studios = Form.form(Studio.class);
+
+        return ok(studios_kn.render(konstanz));
     }
     public static Result arme() {return ok(uebungen_arme.render());
     }
@@ -181,5 +189,23 @@ public class Application extends Controller {
         }
         loggedInUser.deleteFromPlan(uebungsauswahl);
         return ok(profil.render(loggedInUser));
+    }
+
+    public static Result rateStudio(){
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        String studioname = dynamicForm.get("studio");
+        int rating = Integer.parseInt(dynamicForm.get("value"));
+        System.out.print(" AAAALATER" +rating);
+        List<Studio> studios = Ebean.find(Studio.class).findList();
+        Studio chosenStudio = null;
+        for(Studio s : studios){
+            if(s.getName().equals(studioname)){
+                chosenStudio=s;
+            }
+        }
+        Rating rating2 = new Rating(chosenStudio,loggedInUser,rating);
+        Ebean.save(rating2);
+        loggedInUser.rateStudio(chosenStudio,rating2);
+        return ok(home.render(loggedInUser));
     }
 }
