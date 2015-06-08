@@ -208,15 +208,17 @@ public class Application extends Controller {
         loggedInUser.rateStudio(chosenStudio,rating2);
         return ok(home.render(loggedInUser));
     }
-    public static Result changePasswort(){
+    public static Result changePassword(){
+        System.out.print("HEY");
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             DynamicForm dynamicForm = Form.form().bindFromRequest();
             String oldPW = verschluesseln(dynamicForm.get("oldPW"));
            String newPW = verschluesseln(dynamicForm.get("newPW"));
             String newRep= verschluesseln(dynamicForm.get("newRep"));
-            System.out.print(oldPW +" " +newPW + " " +newRep);
+            System.out.print(oldPW);
             loggedInUser.changePasswort(oldPW, newPW, newRep);
+            Ebean.save(loggedInUser);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

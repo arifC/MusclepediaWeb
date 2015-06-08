@@ -54,16 +54,15 @@ public class User {
         return password;
     }
 
-    public void changePasswort(String oldPw, String newPw, String newRep){//beispielmethode
+    public void changePassword(String oldPw, String newPw, String newRep){//beispielmethode
         if(oldPw== password){
             if(newPw==newRep){
                 this.password =newPw;
-                Ebean.save(this);
             }else{
                 System.out.println("Wiederholung stimmt nicht");
             }
         }
-        System.out.print("BIN HIER");
+
     }
 
     public Plan getMyPlan() {

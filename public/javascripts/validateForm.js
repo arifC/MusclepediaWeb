@@ -4,16 +4,16 @@
 
 function validateRegistryForm(){
     var benutzername = document.forms["regForm"]["benutzername"].value;
-    var passwort = document.forms["regForm"]["passwort"].value;
-    var passwort2 = document.forms["regForm"]["passwort2"].value;
+    var passwort = document.forms["regForm"]["password"].value;
+    var passwort2 = document.forms["regForm"]["password2"].value;
     var email = document.forms["regForm"]["mail"].value;
 
-    if (benutzername == null || benutzername == "" || passwort == null || passwort == "" || passwort2 == null || passwort2 == "" || email == null || email == "") {
-        alert("Es müssen alle Felder ausgefüllt sein");
+    if (benutzername == null || benutzername == "" || password == null || password == "" || password2 == null || password2 == "" || email == null || email == "") {
+        alert("Es mï¿½ssen alle Felder ausgefï¿½llt sein");
         return false;
     }else {
-        if (passwort != passwort2) {
-            alert("Passwörter sind ungleich");
+        if (password != password2) {
+            alert("Passwï¿½rter sind ungleich");
             return false;
         } else {
             if (benutzername.length <= 5) {

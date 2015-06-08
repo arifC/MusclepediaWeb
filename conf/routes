@@ -23,7 +23,7 @@ GET         /deleteExercise              controllers.Application.deleteExercise(
 GET         /rateStudio                  controllers.Application.rateStudio()
 POST        /createUser                  controllers.Application.createUser()
 POST        /start                       controllers.Application.start()
-POST        /changePasswort              controllers.Application.changePasswort()
+POST        /changePassword              controllers.Application.changePassword()
 
 #AJAX
 GET         /searchStudio                controllers.Application.searchStudio(value)
