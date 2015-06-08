@@ -21,15 +21,15 @@
             </div>
         </div>
         <div class="col-md-6">
-            <form method="post" class="form-group">
+            <form method="post" action="/changePasswort" name="changeForm" class="form-group" onsubmit=" return validateChanges() ">
                 <label> Altes Passwort </label>
-                <input class="form-control" type="password" id="pwalt" placeholder="Enter old pw">
+                <input class="form-control" type="password" name="oldPW" placeholder="Enter old pw">
                 <label> Neues Passwort </label>
-                <input class="form-control" type="password" id="pwneu" placeholder="Enter new pw">
+                <input class="form-control" type="password" name="newPW" placeholder="Enter new pw">
                 <label> Neues Passwort wiederholen </label>
-                <input class="form-control" type="password" id="pwwieder" placeholder="repeat new pw">
+                <input class="form-control" type="password" name="newRep" placeholder="repeat new pw">
                 <br>
-                <button class="btn btn-primary">Passwort ändern </button>
+                <input type="submit" class="btn btn-success" name="change" value="Passwort ändern"/>
             </form>
         </div>
     </div>

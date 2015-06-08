@@ -58,11 +58,12 @@ public class User {
         if(oldPw== password){
             if(newPw==newRep){
                 this.password =newPw;
+                Ebean.save(this);
             }else{
                 System.out.println("Wiederholung stimmt nicht");
             }
-        }else
-            System.out.println("Passwort falsch");
+        }
+        System.out.print("BIN HIER");
     }
 
     public Plan getMyPlan() {
