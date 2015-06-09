@@ -28,8 +28,8 @@ public class Application extends Controller {
     }
 
     public static Result start() {
-        konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
-        Ebean.save(konstanz);
+        //konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
+        //Ebean.save(konstanz);
         //sobald der passende User gefunden ist, ist foundUser true
         boolean foundUser = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -73,8 +73,14 @@ public class Application extends Controller {
     }
     public static Result knStudio(){
         //Form<Studio> studios = Form.form(Studio.class);
-
-        return ok(studios_kn.render(konstanz));
+        List<Studio> studios = Ebean.find(Studio.class).findList();
+        Studio studio = null;
+        for(Studio s : studios){
+            if(s.getName().equals("clever")){
+                studio = s;
+            }
+        }
+        return ok(studios_kn.render(studio));
     }
     public static Result arme() {return ok(uebungen_arme.render());
     }
@@ -214,10 +220,10 @@ public class Application extends Controller {
             MessageDigest md = MessageDigest.getInstance("MD5");
             DynamicForm dynamicForm = Form.form().bindFromRequest();
             String oldPW = verschluesseln(dynamicForm.get("oldPW"));
-           String newPW = verschluesseln(dynamicForm.get("newPW"));
+            String newPW = verschluesseln(dynamicForm.get("newPW"));
             String newRep= verschluesseln(dynamicForm.get("newRep"));
             System.out.print(oldPW);
-            loggedInUser.changePasswort(oldPW, newPW, newRep);
+            loggedInUser.changePassword(oldPW, newPW, newRep);
             Ebean.save(loggedInUser);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

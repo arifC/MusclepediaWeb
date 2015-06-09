@@ -52,23 +52,22 @@ public class Studio {
         this.totalRating = (totalFacilities + totalLocation + totalPrice + totalService) / 4;
     }
 
-    public double calcAverage2(){
+    public void calcAverage2(){
         double counter = 0;
         double summe=0;
         for(Rating rating : ratings){
             summe += rating.getValue();
             counter++;
         }
-        totalRating = summe;
-        return summe/counter;
+        totalRating = summe/counter;
     }
     public void addBewertung(Rating bw){
         ratings.add(bw);
-        Ebean.save(this);
         calcAverage2();
+        Ebean.save(this);
         JFrame frame = new JFrame("Nachricht");
-        JOptionPane.showMessageDialog(frame,bw.getValue());
-        JOptionPane.showMessageDialog(frame,this.getTotalRating());
+        JOptionPane.showMessageDialog(frame, bw.getValue());
+        JOptionPane.showMessageDialog(frame, this.getTotalRating());
     }
 
     public Rating getBewertung(int i){

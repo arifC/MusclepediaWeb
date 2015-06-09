@@ -74,6 +74,8 @@ public class User {
     }
 
     public void rateStudio(Studio studio,Rating rating){
+        JFrame frame = new JFrame("Nachricht");
+        JOptionPane.showMessageDialog(frame,studio.getName() + rating.getValue());
         studio.addBewertung(rating);
     }
 }
