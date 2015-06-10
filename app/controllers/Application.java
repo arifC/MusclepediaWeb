@@ -75,6 +75,7 @@ public class Application extends Controller {
                 loggedInUser = user;
                 foundUser = true;
             }
+            //test
         }
         if (foundUser){
             return ok(home.render(loggedInUser));
