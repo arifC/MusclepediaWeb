@@ -13,7 +13,7 @@
                                 <img src="@routes.Assets.at("images/favicon.png")"/>
                             </div>
                             <div class="col-md-4 col-md-offset-2">
-                            <div> Durchschnittliche Bewertung: <span id="bewertung"> hallo  @studio.getTotalRating() @studio.getName() </span></div>
+                            <div> Durchschnittliche Bewertung: <span id="bewertung"> @studio.getTotalRating() @studio.getName() </span></div>
                             <table border="2">
                                 <tr>
                                     <th>Punkt </th>
@@ -51,8 +51,9 @@
                                     <td>Nicht abgeben </td>
                                 </tr>
                             </table>
+                                <br>
                                 <form action="/rateStudio" method="get">
-                              <input type="text" name="value">  <input type="submit" class="btn btn-primary" placeholder="Rating abgeben">
+                              <input type="text" name="value"  placeholder="Rating abgeben">  <input type="submit" class="btn btn-primary">
                                 <input type="hidden" name="studio" value="clever">
                                 </form>
                             </div>

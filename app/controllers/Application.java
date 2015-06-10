@@ -22,7 +22,8 @@ import java.util.UUID;
 public class Application extends Controller {
 
     public static User loggedInUser = null;
-    public static Studio konstanz = null;
+   // public static Studio konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
+
 
     public static Result login(){return ok(login.render());
     }
@@ -73,6 +74,7 @@ public class Application extends Controller {
     }
     public static Result knStudio(){
         //Form<Studio> studios = Form.form(Studio.class);
+       // Ebean.save(konstanz);
         List<Studio> studios = Ebean.find(Studio.class).findList();
         Studio studio = null;
         for(Studio s : studios){
@@ -201,7 +203,6 @@ public class Application extends Controller {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String studioname = dynamicForm.get("studio");
         int rating = Integer.parseInt(dynamicForm.get("value"));
-        System.out.print(" AAAALATER" +rating);
         List<Studio> studios = Ebean.find(Studio.class).findList();
         Studio chosenStudio = null;
         for(Studio s : studios){

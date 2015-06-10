@@ -65,9 +65,6 @@ public class Studio {
         ratings.add(bw);
         calcAverage2();
         Ebean.save(this);
-        JFrame frame = new JFrame("Nachricht");
-        JOptionPane.showMessageDialog(frame, bw.getValue());
-        JOptionPane.showMessageDialog(frame, this.getTotalRating());
     }
 
     public Rating getBewertung(int i){
