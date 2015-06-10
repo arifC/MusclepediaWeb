@@ -25,7 +25,7 @@ create table rating (
   location                  double,
   studio_studio_id          varchar(40),
   user_benutzer_id          varchar(40),
-  value                     integer,
+  value                     double,
   constraint pk_rating primary key (rating_id))
 ;
 

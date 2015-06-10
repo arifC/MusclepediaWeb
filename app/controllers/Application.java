@@ -98,7 +98,7 @@ public class Application extends Controller {
         List<Studio> studios = Ebean.find(Studio.class).findList();
         Studio studio = null;
         for(Studio s : studios){
-            if(s.getName().equals("clever")){
+            if(s.getName().equals("Clever Fit")){
                 studio = s;
             }
         }
@@ -222,7 +222,7 @@ public class Application extends Controller {
     public static Result rateStudio(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String studioname = dynamicForm.get("studio");
-        int rating = Integer.parseInt(dynamicForm.get("value"));
+        double rating = Double.parseDouble(dynamicForm.get("value"));
         List<Studio> studios = Ebean.find(Studio.class).findList();
         Studio chosenStudio = null;
         for(Studio s : studios){
