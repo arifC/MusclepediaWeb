@@ -41,7 +41,6 @@ public class Application extends Controller {
         Ebean.save(hammer_arme);
         Ebean.save(konz_arme);
 
-
     }
 
     public static Result start() {
@@ -55,8 +54,9 @@ public class Application extends Controller {
         if(dynamicForm.get("username").matches("admin")){
             loggedInUser = new User("admin", "nomail", "admin");
             Ebean.save(loggedInUser);
-            if(Ebean.find(Studio.class).findList() == null){
+            if(Ebean.find(Studio.class).findList().size() == 0){
                 buildDatabase();
+                System.out.println("######DATENBANK NEU AUFBAUEN######");
             }
             return ok(home.render(loggedInUser));
         }

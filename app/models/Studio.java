@@ -34,6 +34,7 @@ public class Studio {
         this.strasse = strasse;
         this.plz = plz;
         this.ort = ort;
+        this.studio_id = UUID.randomUUID();
     }
 
     public void calcAverage(){
