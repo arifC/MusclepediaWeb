@@ -1,10 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
-import models.Exercise;
-import models.Rating;
-import models.Studio;
-import models.User;
+import models.*;
 import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.*;
@@ -28,6 +25,25 @@ public class Application extends Controller {
     public static Result login(){return ok(login.render());
     }
 
+    public static void buildDatabase(){
+        //Studios
+        Studio clever_konstanz = new Studio("Clever Fit", "Rudolph-Diesel-Str.", 78462, "Konstanz");
+        Studio happy_konstanz = new Studio("Happy Fit", "Bruder-Klaus-Str.", 78467, "Konstanz");
+        Studio speedy_konstanz = new Studio("Speedy Fit", "Joseph-Belli-Weg", 78467, "Konstanz");
+        Ebean.save(clever_konstanz);
+        Ebean.save(happy_konstanz);
+        Ebean.save(speedy_konstanz);
+
+        //Übungen
+        Exercise french_arme = new Exercise("Frenchpress", Muscle.Arme, "Eine Trizepsübung im Liegen, die alle Muskelköpfe belastet.", "Fortgeschritten");
+        Exercise hammer_arme = new Exercise("Hammer-Curls", Muscle.Arme, "Eine Bizepsübung im Stehen, die den Bizeps und den Unterarm trainiert.", "Fortgeschritten");
+        Exercise konz_arme = new Exercise("Konzentration-Curls", Muscle.Arme, "Eine Bizepsübung im Sitzen, die sich auf den inneren Muskelkopf konzentriert.", "Fortgeschritten");
+        Ebean.save(french_arme);
+        Ebean.save(hammer_arme);
+        Ebean.save(konz_arme);
+
+    }
+
     public static Result start() {
         //konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
         //Ebean.save(konstanz);
@@ -39,6 +55,10 @@ public class Application extends Controller {
         if(dynamicForm.get("username").matches("admin")){
             loggedInUser = new User("admin", "nomail", "admin");
             Ebean.save(loggedInUser);
+            if(Ebean.find(Studio.class).findList().size() == 0){
+                buildDatabase();
+                System.out.println("######DATENBANK NEU AUFBAUEN######");
+            }
             return ok(home.render(loggedInUser));
         }
         //liste aller User
