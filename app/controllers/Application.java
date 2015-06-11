@@ -22,7 +22,7 @@ public class Application extends Controller {
    // public static Studio konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
 
 
-    public static Result login(){return ok(login.render());
+    public static Result login(){return ok(login.render(" "));
     }
 
     public static void buildDatabase(){
@@ -68,7 +68,7 @@ public class Application extends Controller {
             String dbUserPassword = user.getPassword();
             String dbUserName = user.getName();
             //User aus Anfrage
-            String logInPassword = verschluesseln(dynamicForm.get("passwort"));
+            String logInPassword = verschluesseln(dynamicForm.get("password"));
             String logInUserName = dynamicForm.get("username");
 
             if(dbUserPassword.matches(logInPassword) && (dbUserName.matches(logInUserName))){
@@ -139,22 +139,20 @@ public class Application extends Controller {
 
     }
     public static Result createUser(){
-        boolean usernameInUse = false;
-        boolean emailInUse  = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         List<User> user2 = Ebean.find(User.class).findList();
         String username = dynamicForm.get("benutzername");
         String email = dynamicForm.get("mail");
         for(User u : user2) {
             if (u.getName().equals(username)) {
-                usernameInUse = true;
+                ok(login.render("Username"));
             }
             if (u.getEmail().equals(email)) {
-                emailInUse = true;
+               ok(login.render("mail"));
             }
         }
 
-        if(!usernameInUse && !emailInUse) {
+
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 UUID id = UUID.randomUUID();
@@ -163,17 +161,8 @@ public class Application extends Controller {
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-            return ok(login.render());
-        }else{
-            JFrame frame = new JFrame("Nachricht");
-            if(usernameInUse){
-                JOptionPane.showMessageDialog(frame,"Username ist schon vergeben");
-            }
-            if(emailInUse){
-                JOptionPane.showMessageDialog(frame,"Diese Email-Adresse ist schon registriert");
-            }
-            return ok(login.render());
-        }
+            return ok(login.render("success"));
+
     }
 
     public static Result searchStudio(String studio) {

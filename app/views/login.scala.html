@@ -1,4 +1,4 @@
-
+@(message: String)
 @firstPage("Musclepedia"){
     <div class="row text-center">
 
@@ -83,10 +83,27 @@
                 </div>
 
         </div>
+        <div>
+            @if(message=="success")(
+
+                    )
+            @if(message=="loggout")(
+
+                    )
+
+            @if(message=="Username")(
+
+                    )
+            @if(message=="mail")(
+
+                    )
+
+       </div>
+
         <script type="text/javascript">
             $(document).ready(function ($) {
                 $('#myTab').tab();
               });
     	</script>
     </div>
-}
+    }
