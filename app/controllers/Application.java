@@ -103,7 +103,7 @@ public class Application extends Controller {
                 studio = s;
             }
         }
-        return ok(studios_kn.render(studio));
+        return ok(studios_kn.render(studios));
     }
     public static Result arme() {return ok(uebungen_arme.render());
     }

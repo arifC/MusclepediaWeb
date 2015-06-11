@@ -59,6 +59,7 @@ public class Studio {
         for(Rating rating : ratings){
             summe += rating.getValue();
             counter++;
+
             JFrame frame = new JFrame("Nachricht");
             JOptionPane.showMessageDialog(frame, "value" + rating.getValue() + "counter" + counter + "summe" + summe + "total" + getTotalRating());
 
