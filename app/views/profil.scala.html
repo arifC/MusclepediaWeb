@@ -14,9 +14,13 @@
                                 @if(user.getEmail() != null){
                                     <td> @(user.getEmail()) </td>
                                 }
-                                @if(user.getStudio() != null){
-                                    <td> @(user.getStudio().getName()) </td>
-                                }
+                                <td>
+                                    @if(user.getStudio() != null){
+                                     @(user.getStudio().getName())
+                                    }
+                                    <br/>
+                                    <a href="/knstudio">Mein Studio</a>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -27,7 +31,6 @@
         <div class="col-md-6" id="changeForm">
 
             <input type="button" value="Neues Passwort festlegen" onclick="changePasswordForm()"/>
-            <input type="button" value="Mein Studio hinzufügen" href="/knstudio"/>
         </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
