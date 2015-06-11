@@ -1,10 +1,13 @@
-@(studio : java.util.List[models.Studio])
+@(studios : java.util.List[models.Studio])
 @start("Studiosuche"){
     <div class="row text-center">
         <div class="col-md-8 col-md-offset-2" id="kn">
             <h1> Studios in Konstanz</h1>
             <ol>
                 <li>
+                    @for(s <- studios ) {
+                        <p>@s.getName</p>
+                    }
                         <div id="platz1">
                             <h3>TESTSTUDIO </h3>
                             <p>Konstanz Straßenname Hausnr Öffnungszeiten:Zeit   Preis:Geld</p>
