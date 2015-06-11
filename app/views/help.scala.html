@@ -3,44 +3,47 @@
     <script src="@routes.Assets.at("javascripts/help_kalrechner.js")" type="text/javascript"></script>
     <div class="row text-left">
         <div class="col-md-8" id="helppage">
-            <p class="erklaerung">Wilkommen auf Musclepedia die Seite rund um Fitness! Unter Übungen kannst du Übungen jeder Art ansehen und zu deinen Persönlichen Plan hinzufügen.
-            Dabei wird zwischen den einzelnen Körberteilen unterschieden.</p>
-            <p>Der Reiter <a href="#">Pläne</a> zeigt dir verschiedene standard Pläne sowie deinen eigenen von dir erstellten Plan</p>
-            <p> Deine Profileinstellungen kannst du unter <a href="#">Profil</a> ändern, sollte das nicht klappen kannst du uns mit <a href="/kontakt">Kontakt</a> erreichen</p>
-            <p><a href="/studios">Studios</a> führt dich zu einer Liste aller Orte deren Studios wir hier aufführen, klickst du auf einen Ort kannst du sämtliche Studios und deren Rating ansehen sowie selber bewertungen abgeben. </p>
-            <p>Unter dieser Seite findest du sowohl einen BMI-Rechner wie auch einen Kalorinrechner um dir zu Helfen sowei unten noch ein FAQ </p>
+            <a href="#">Pläne</a><br/>
+            <a href="#">Profil</a><br/>
+            <a href="/kontakt">Kontakt</a><br/>
+            <a href="/studios">Studios</a><br/>
             <div role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#bmire" role="tab" data-toggle="tab">BMI-Rechner </a> </li>
-                    <li role="presentation"><a href="ä#kalre" role="tab" data-toggle="tab">Kalorienrechner</a> </li>
+                    <li role="presentation" class="active">
+                        <a href="#bmire" role="tab" data-toggle="tab">BMI-Rechner </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#kalre" role="tab" data-toggle="tab">Kalorienrechner</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="bmire">
                         <h3>BMI Rechner </h3>
-                        <p> Der Body Mass Index gibt eine Einordnung für Erwachsene mit normalen Körperbau an. Die Aussagen des Rechners sind nur grob und sollten daher kritisch betrachtet werden.</p>
-                        <p><input type="number" id="groesseB" placeholder="1.X"/>Größe </p>
-                        <p><input type="number" id="gewichtB" placeholder="in Kg (70.5)"/>Gewicht </p>
-                        <select id="gesch">
-                            <option value="männlich">männlich</option>
-                            <option value="weiblich">weiblich</option>
+                        <p> Der Body Mass Index gibt eine Einordnung für Erwachsene mit normalen Körperbau an.
+                            Die Aussagen des Rechners sind nur grob und sollten daher kritisch betrachtet werden.</p>
+                        <p><input type="number" id="groesseB" placeholder="m"/>Größe </p>
+                        <p><input type="number" id="gewichtB" placeholder="kg"/>Gewicht </p>
+                        <select id="geschlecht">
+                            <option value="1">männlich</option>
+                            <option value="2">weiblich</option>
                         </select>
-                        <p>Überprüfe bitte alle Angaben <input type="button" onclick="bmirechnen()" value="BMI berechnen"></p>
+                        <p>Überprüfe bitte alle Angaben <input type="button" onclick="calcBMI()" value="BMI berechnen"></p>
                         <div id="bmierg"></div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="kalre">
                         <h3>Kalorienrechner</h3>
-                        <p> Größe:  <input type="number" id="groesseK" placeholder="1.X"></p>
-                        <p> Gewicht:     <input type="number" id="gewichtK" placeholder="in Kg (70.5)"></p>
-                        <p> Alter: <input type="number" id="alter" placeholder="in Jahren"></p>
+                        <p> Größe:   <input type="number" id="groesseK" placeholder="m"></p>
+                        <p> Gewicht: <input type="number" id="gewichtK" placeholder="kg"></p>
+                        <p> Alter:   <input type="number" id="alter" placeholder="in Jahren"></p>
                         <p> Aktivitäten </p>
                         <select id="faktor">
-                            <option value="1.2"> Nur sitzend oder liegend</option>
-                            <option value="1.5"> sitzend kaum körperliche Aktivität</option>
-                            <option value="1.7"> sitzend gehend und stehend</option>
-                            <option value="1.9"> Hauptsächlich gehend und stehend</option>
+                            <option value="1.2">Nur sitzend oder liegend</option>
+                            <option value="1.5">sitzend, kaum körperliche Aktivität</option>
+                            <option value="1.7">sitzend, gehend und stehend</option>
+                            <option value="1.9">Hauptsächlich gehend und stehend</option>
                             <option value="2.2">Körperlich anstrengende Arbeit </option>
                         </select>
-                        <button onclick="berechneKal()">Berechnen </button>
+                        <button onclick="calcCal()">Berechnen </button>
                         <div id="kalerg"></div>
                     </div>
                 </div>

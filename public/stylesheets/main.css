@@ -20,3 +20,7 @@ h4 {
     height: 300px;
     width: 500px;
 }
+
+#kalerg, #bmierg {
+    font-size: large;
+}
