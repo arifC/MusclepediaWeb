@@ -268,4 +268,15 @@ public class Application extends Controller {
         session().clear();
         return redirect("/");
     }
+
+    public static Result myStudio() {
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        String studioName = dynamicForm.get("studio");
+        for(Studio studio : Ebean.find(models.Studio.class).findList()){
+            if(studio.getName().equals(studioName)){
+                loggedInUser.setStudio(studio);
+            }
+        }
+        return ok(profil.render(loggedInUser));
+    }
 }

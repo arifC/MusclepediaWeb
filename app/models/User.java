@@ -59,6 +59,11 @@ public class User {
         Ebean.save(this);
     }
 
+    public void setStudio(Studio studio) {
+        this.studio = studio;
+        Ebean.save(this);
+    }
+
     public Plan getMyPlan() {
         return myPlan;
     }
