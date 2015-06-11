@@ -194,19 +194,37 @@ public class Application extends Controller {
 
     public static Result rateStudio(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
+        //schauen ob der User schon eine Bewertung für das gesuchte Studio abgegeben hat
+        List<Rating> ratings = Ebean.find(Rating.class).findList();
         String studioname = dynamicForm.get("studio");
         double rating = Double.parseDouble(dynamicForm.get("value"));
-        List<Studio> studios = Ebean.find(Studio.class).findList();
-        Studio chosenStudio = null;
-        for(Studio s : studios){
-            if(s.getName().equals(studioname)){
-                chosenStudio=s;
+        boolean ratingAlreadyExists = false;
+        boolean valueNotInRange = false;
+        for(Rating r : ratings){
+            if(r.getStudio().getName().equals(studioname) && r.getUser().getName().equals(loggedInUser.getName())){
+                ratingAlreadyExists = true;
             }
         }
-        Rating rating2 = new Rating(chosenStudio,loggedInUser,rating);
-        Ebean.save(rating2);
-        loggedInUser.rateStudio(chosenStudio,rating2);
-        return ok(home.render(loggedInUser));
+        if(rating > 10 || rating <= 0){
+            valueNotInRange = true;
+        }
+
+        if(!ratingAlreadyExists && !valueNotInRange) {
+            List<Studio> studios = Ebean.find(Studio.class).findList();
+            Studio chosenStudio = null;
+            for (Studio s : studios) {
+                if (s.getName().equals(studioname)) {
+                    chosenStudio = s;
+                }
+            }
+            Rating rating2 = new Rating(chosenStudio, loggedInUser, rating);
+            Ebean.save(rating2);
+            loggedInUser.rateStudio(chosenStudio, rating2);
+            return ok(home.render(loggedInUser));
+        }else{
+            // Hier muss dann noch eine Ausgabe hin: "also Bewertung bereits abgegeben"
+            return ok(studios.render());
+        }
     }
     public static Result changePassword(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();

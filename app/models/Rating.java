@@ -74,4 +74,15 @@ public class Rating {
         this.location = location;
     }
 
+    public UUID getRating_id() {
+        return rating_id;
+    }
+
+    public Studio getStudio() {
+        return studio;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
