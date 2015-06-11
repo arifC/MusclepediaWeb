@@ -20,6 +20,24 @@ public class Application extends Controller {
 
     public static User loggedInUser = null;
 
+    public static void checkLogin(){
+        String username = session("username");
+        if(username==null) {
+            System.out.print("platzhalter");
+        }
+
+        List<User> users = Ebean.find(User.class).findList();
+
+        for (User u: users) {
+            if(u.getName().equals(username)) {
+                loggedInUser=u;
+                session("username", u.getName());
+            }
+        }
+
+    }
+
+
     public static Result login(){return ok(login.render(" "));
     }
 
@@ -57,6 +75,7 @@ public class Application extends Controller {
                 buildDatabase();
                 System.out.println("######DATENBANK NEU AUFBAUEN######");
             }
+            checkLogin();
             return ok(home.render(loggedInUser));
         }
         //liste aller User
@@ -76,6 +95,7 @@ public class Application extends Controller {
             //test
         }
         if (foundUser){
+            session("username", loggedInUser.getName());
             return ok(home.render(loggedInUser));
         }
         else{
@@ -108,6 +128,7 @@ public class Application extends Controller {
     public static Result kontakt(){return ok(kontakt.render());
     }
     public static Result profil(){
+        checkLogin();
         return ok(profil.render(loggedInUser));
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
@@ -158,6 +179,7 @@ public class Application extends Controller {
     }
 
     public static Result home() {
+        checkLogin();
         return ok(home.render(loggedInUser));
     }
 
@@ -173,7 +195,7 @@ public class Application extends Controller {
                 uebungsauswahl = u;
             }
         }
-
+        checkLogin();
         loggedInUser.addToPlan(uebungsauswahl);
         return ok(home.render(loggedInUser));
     }
@@ -188,6 +210,7 @@ public class Application extends Controller {
                 uebungsauswahl = u;
             }
         }
+        checkLogin();
         loggedInUser.deleteFromPlan(uebungsauswahl);
         return ok(profil.render(loggedInUser));
     }
@@ -217,6 +240,7 @@ public class Application extends Controller {
                     chosenStudio = s;
                 }
             }
+            checkLogin();
             Rating rating2 = new Rating(chosenStudio, loggedInUser, rating);
             Ebean.save(rating2);
             loggedInUser.rateStudio(chosenStudio, rating2);
@@ -232,6 +256,7 @@ public class Application extends Controller {
         String newPW = verschluesseln(dynamicForm.get("newPW"));
         String newRep= verschluesseln(dynamicForm.get("newRep"));
         System.out.print(oldPW);
+        checkLogin();
         loggedInUser.changePassword(oldPW, newPW, newRep);
         Ebean.save(loggedInUser);
         return ok(profil.render(loggedInUser));
