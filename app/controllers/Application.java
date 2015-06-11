@@ -158,7 +158,7 @@ public class Application extends Controller {
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 UUID id = UUID.randomUUID();
-                User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("passwort2")));
+                User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("password2")));
                 Ebean.save(user);
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
