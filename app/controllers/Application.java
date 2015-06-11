@@ -252,13 +252,16 @@ public class Application extends Controller {
     public static Result changePassword(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String oldPW = verschluesseln(dynamicForm.get("oldPassword"));
-        String newPW = verschluesseln(dynamicForm.get("newPassword"));
-        String newRep= verschluesseln(dynamicForm.get("newPassword2"));
-        System.out.print(oldPW);
-        checkLogin();
-        loggedInUser.changePassword(oldPW, newPW, newRep);
-        Ebean.save(loggedInUser);
-        return ok(profil.render(loggedInUser));
+
+        if(oldPW.equals(loggedInUser.getPassword())){
+            String newPW = verschluesseln(dynamicForm.get("newPassword"));
+            loggedInUser.setPassword(newPW);
+            return ok(profil.render(loggedInUser));
+        }
+        else{
+            return ok(profil.render(loggedInUser));
+        }
+
     }
 
     public static Result logout() {

@@ -41,11 +41,11 @@ public class User {
         return email;
     }
 
-    public User(String name, String mail, String passwort){
+    public User(String name, String mail, String password){
         this.benutzer_id = UUID.randomUUID();
         this.name = name;
         this.email = mail;
-        this.password = passwort;
+        this.password = password;
         this.myPlan = new Plan("testPlan");
         Ebean.save(this.myPlan);
     }
@@ -54,15 +54,9 @@ public class User {
         return password;
     }
 
-    public void changePassword(String oldPw, String newPw, String newRep){//beispielmethode
-        if(oldPw== password){
-            if(newPw==newRep){
-                this.password =newPw;
-            }else{
-                System.out.println("Wiederholung stimmt nicht");
-            }
-        }
-
+    public void setPassword(String password){
+        this.password = password;
+        Ebean.save(this);
     }
 
     public Plan getMyPlan() {
