@@ -14,14 +14,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 public class Application extends Controller {
 
     public static User loggedInUser = null;
 
-    public static Result login(){return ok(login.render(" "));
-    }
+    public static Result login(){return ok(login.render(" "));}
 
     public static void buildDatabase(){
         //Studios
@@ -43,9 +41,6 @@ public class Application extends Controller {
     }
 
     public static Result start() {
-        //konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
-        //Ebean.save(konstanz);
-        //sobald der passende User gefunden ist, ist foundUser true
         boolean foundUser = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         
@@ -57,6 +52,7 @@ public class Application extends Controller {
                 buildDatabase();
                 System.out.println("######DATENBANK NEU AUFBAUEN######");
             }
+            session("loggedInUser", loggedInUser.getName());
             return ok(home.render(loggedInUser));
         }
         //liste aller User
@@ -76,6 +72,7 @@ public class Application extends Controller {
             //test
         }
         if (foundUser){
+            session("loggedInUser", loggedInUser.getName());
             return ok(home.render(loggedInUser));
         }
         else{
@@ -92,8 +89,6 @@ public class Application extends Controller {
     public static Result studios(){return ok(studios.render());
     }
     public static Result knStudio(){
-        //Form<Studio> studios = Form.form(Studio.class);
-       // Ebean.save(konstanz);
         List<Studio> studios = Ebean.find(Studio.class).findList();
         return ok(studios_kn.render(studios));
     }
@@ -108,7 +103,18 @@ public class Application extends Controller {
     public static Result kontakt(){return ok(kontakt.render());
     }
     public static Result profil(){
-        return ok(profil.render(loggedInUser));
+        String username = session("loggedInUser");
+        for(User u : Ebean.find(models.User.class).findList()){
+            if (u.getName().equals(username)) {
+                loggedInUser = u;
+            }
+        }
+        if (loggedInUser != null){
+            return ok(profil.render(loggedInUser));
+        }
+        else{
+            return redirect("/");
+        }
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
     }
@@ -235,5 +241,10 @@ public class Application extends Controller {
         loggedInUser.changePassword(oldPW, newPW, newRep);
         Ebean.save(loggedInUser);
         return ok(profil.render(loggedInUser));
+    }
+
+    public static Result logout() {
+        session().clear();
+        return redirect("/");
     }
 }

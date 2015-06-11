@@ -1,6 +1,5 @@
 @(user: models.User)
 @start("Musclepedia"){
-
     <div>
         <div class="col-md-6">
             <div role="tabpanel" class="tab-pane">
@@ -21,20 +20,18 @@
             </div>
         </div>
         <div class="col-md-6">
-            <form method="post" action="/changePassword " name="changeForm"  onsubmit=" return validateChanges() ">
+            <form method="post" action="/changePassword " name="changeForm"  onsubmit="return validateChanges()">
                 <label> Altes Passwort </label>
-                <input class="form-control" type="password" name="oldPW" placeholder="Enter old pw">
+                <input class="form-control" type="password" name="oldPassword" placeholder="Altes Passwort">
                 <label> Neues Passwort </label>
-                <input class="form-control" type="password" name="newPW" placeholder="Enter new pw">
+                <input class="form-control" type="password" name="newPassword" placeholder="Neues Passwort">
                 <label> Neues Passwort wiederholen </label>
-                <input class="form-control" type="password" name="newRep" placeholder="repeat new pw">
+                <input class="form-control" type="password" name="newPassword2" placeholder="Wiederhole neues Passwort">
                 <br>
                 <input type="submit" class="btn btn-success" name="change" value="Passwort ändern"/>
             </form>
         </div>
     </div>
-
-
     <div class="col-md-8 col-md-offset-2">
         @if(user.showPlan() != null){
             <div  class="text-center">

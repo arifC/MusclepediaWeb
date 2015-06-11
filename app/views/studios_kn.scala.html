@@ -3,19 +3,22 @@
     <div class="row text-center">
         <div class="col-md-8 col-md-offset-2" id="kn">
             <h1> Studios in Konstanz</h1>
-                    @for(s <- studios ) {
-                        <div>
-                            <table border="1" class="table table-striped">
-                                <tr><th> Name </th> <th> Ort </th><th> Straße </th> <th>PLZ</th><th> Durchschnittliche Bewertung </th> <th> Bewerten </th></tr>
-                                <tr> <td>@s.getName()</td>  <td>@s.getOrt</td> <td>@s.getStrasse</td> <td>@s.getPlz()</td> <td>@s.getTotalRating</td><td><form action="/rateStudio" method="get">
-                                                                                                                                                            <input type="text" name="value" placeholder="zwischen 1 und 10">  <input type="submit" class="btn btn-primary" value="Bewertung abgeben">
-                                                                                                                                                            <input type="hidden" name="studio" value="@s.getName">
-                                </form></td></tr>
-                            </table>
-                        </div>
-                        <br>
-                        <hr>
-                    }
+                @for(s <- studios ) {
+                    <div>
+                        <table border="1" class="table table-striped">
+                            <tr><th> Name </th> <th> Ort </th><th> Straße </th> <th>PLZ</th><th> Durchschnittliche Bewertung </th> <th> Bewerten </th></tr>
+                            <tr> <td>@s.getName()</td>  <td>@s.getOrt</td> <td>@s.getStrasse</td> <td>@s.getPlz()</td> <td>@s.getTotalRating</td>
+                            <td><form action="/rateStudio" method="get">
+                                 <input type="text" name="value" placeholder="zwischen 1 und 10">  <input type="submit" class="btn btn-primary" value="Bewertung abgeben">
+                                    <input type="hidden" name="studio" value="@s.getName">
+                                </form>
+                            </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                    <hr>
+                }
             </div>
         </div>
 
