@@ -19,9 +19,7 @@ public class Application extends Controller {
 
     public static User loggedInUser = null;
 
-<<<<<<< HEAD
-    public static Result login(){return ok(login.render(" "));}
-=======
+
     public static void checkLogin(){
         String username = session("username");
         if(username==null) {
@@ -40,9 +38,8 @@ public class Application extends Controller {
     }
 
 
-    public static Result login(){return ok(login.render(" "));
-    }
->>>>>>> origin/master
+    public static Result login(){return ok(login.render(" "));}
+
 
     public static void buildDatabase(){
         //Studios
@@ -75,11 +72,8 @@ public class Application extends Controller {
                 buildDatabase();
                 System.out.println("######DATENBANK NEU AUFBAUEN######");
             }
-<<<<<<< HEAD
-            session("loggedInUser", loggedInUser.getName());
-=======
             checkLogin();
->>>>>>> origin/master
+
             return ok(home.render(loggedInUser));
         }
         //liste aller User
@@ -99,11 +93,7 @@ public class Application extends Controller {
             //test
         }
         if (foundUser){
-<<<<<<< HEAD
-            session("loggedInUser", loggedInUser.getName());
-=======
             session("username", loggedInUser.getName());
->>>>>>> origin/master
             return ok(home.render(loggedInUser));
         }
         else{
@@ -134,23 +124,10 @@ public class Application extends Controller {
     public static Result kontakt(){return ok(kontakt.render());
     }
     public static Result profil(){
-<<<<<<< HEAD
-        String username = session("loggedInUser");
-        for(User u : Ebean.find(models.User.class).findList()){
-            if (u.getName().equals(username)) {
-                loggedInUser = u;
-            }
-        }
-        if (loggedInUser != null){
-            return ok(profil.render(loggedInUser));
-        }
-        else{
-            return redirect("/");
-        }
-=======
+
         checkLogin();
         return ok(profil.render(loggedInUser));
->>>>>>> origin/master
+
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
     }
