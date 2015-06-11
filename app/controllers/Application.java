@@ -113,7 +113,9 @@ public class Application extends Controller {
     }
     public static Result impressum() {return ok(impressum.render());
     }
-    public static Result kontakt(){return ok(kontakt.render());
+    public static Result kontakt(){
+        checkLogin();
+        return ok(kontakt.render(loggedInUser));
     }
     public static Result profil(){
         if(checkLogin()){
