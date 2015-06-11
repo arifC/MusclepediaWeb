@@ -7,7 +7,6 @@ import play.mvc.*;
 import views.html.*;
 import play.data.Form;
 
-import javax.swing.*;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -20,26 +19,27 @@ public class Application extends Controller {
     public static User loggedInUser = null;
 
 
-    public static void checkLogin(){
+    public static boolean checkLogin(){
         String username = session("username");
-        if(username==null) {
-            System.out.print("platzhalter");
+        System.out.print("SESSIONNAME:" + username);
+        if(username == null){
+            System.out.print("REDIRECT");
+            return false;
         }
-
-        List<User> users = Ebean.find(User.class).findList();
-
-        for (User u: users) {
-            if(u.getName().equals(username)) {
-                loggedInUser=u;
-                session("username", u.getName());
+        else{
+            List<User> users = Ebean.find(User.class).findList();
+            for (User user : users) {
+                if(user.getName().equals(username)) {
+                    loggedInUser = user;
+                    session("username", loggedInUser.getName());
+                }
             }
+            return true;
         }
 
     }
 
-
     public static Result login(){return ok(login.render(" "));}
-
 
     public static void buildDatabase(){
         //Studios
@@ -72,10 +72,10 @@ public class Application extends Controller {
                 buildDatabase();
                 System.out.println("######DATENBANK NEU AUFBAUEN######");
             }
-            checkLogin();
-
+            session("username", loggedInUser.getName());
             return ok(home.render(loggedInUser));
         }
+
         //liste aller User
         List<User> allUsers = Ebean.find(User.class).findList();
         for(User user : allUsers){
@@ -88,19 +88,11 @@ public class Application extends Controller {
 
             if(dbUserPassword.matches(logInPassword) && (dbUserName.matches(logInUserName))){
                 loggedInUser = user;
-                foundUser = true;
+                session("username", loggedInUser.getName());
+                return ok(home.render(loggedInUser));
             }
-            //test
         }
-        if (foundUser){
-            session("username", loggedInUser.getName());
-            return ok(home.render(loggedInUser));
-        }
-        else{
-            JFrame frame = new JFrame("Nachricht");
-            JOptionPane.showMessageDialog(frame,"Username oder Passwort falsch");
-            return redirect("/");
-        }
+        return ok(login.render("loginFail"));
     }
 
     public static Result help() {return ok(help.render());
@@ -124,9 +116,12 @@ public class Application extends Controller {
     public static Result kontakt(){return ok(kontakt.render());
     }
     public static Result profil(){
-
-        checkLogin();
-        return ok(profil.render(loggedInUser));
+        if(checkLogin()){
+            return ok(profil.render(loggedInUser));
+        }
+        else{
+            return redirect("/");
+        }
 
     }
     public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
@@ -177,8 +172,12 @@ public class Application extends Controller {
     }
 
     public static Result home() {
-        checkLogin();
-        return ok(home.render(loggedInUser));
+        if(checkLogin()){
+            return ok(home.render(loggedInUser));
+        }
+        else{
+            return redirect("/");
+        }
     }
 
     public static Result addExercise(){
@@ -250,9 +249,9 @@ public class Application extends Controller {
     }
     public static Result changePassword(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
-        String oldPW = verschluesseln(dynamicForm.get("oldPW"));
-        String newPW = verschluesseln(dynamicForm.get("newPW"));
-        String newRep= verschluesseln(dynamicForm.get("newRep"));
+        String oldPW = verschluesseln(dynamicForm.get("oldPassword"));
+        String newPW = verschluesseln(dynamicForm.get("newPassword"));
+        String newRep= verschluesseln(dynamicForm.get("newPassword2"));
         System.out.print(oldPW);
         checkLogin();
         loggedInUser.changePassword(oldPW, newPW, newRep);

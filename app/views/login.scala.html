@@ -44,6 +44,11 @@
                         </div>
                     </form>
                 </div>
+                <div>
+                    @if(message.equals("loginFail")){
+                        <h2>Fehler: Anmeldung fehlgeschlagen</h2>
+                    }
+                </div>
             </div>
 
                 <div class="col-md-4 col-md-offset-1">
@@ -81,24 +86,8 @@
                         </a>
                     </div>
                 </div>
-
         </div>
-        <div>
-            @if(message=="success")(
 
-                    )
-            @if(message=="loggout")(
-
-                    )
-
-            @if(message=="Username")(
-
-                    )
-            @if(message=="mail")(
-
-                    )
-
-       </div>
 
         <script type="text/javascript">
             $(document).ready(function ($) {
