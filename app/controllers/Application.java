@@ -19,8 +19,6 @@ import java.util.UUID;
 public class Application extends Controller {
 
     public static User loggedInUser = null;
-   // public static Studio konstanz = new Studio("clever","rudolph-diesel",78462,"konstanz");
-
 
     public static Result login(){return ok(login.render(" "));
     }
@@ -97,12 +95,6 @@ public class Application extends Controller {
         //Form<Studio> studios = Form.form(Studio.class);
        // Ebean.save(konstanz);
         List<Studio> studios = Ebean.find(Studio.class).findList();
-        Studio studio = null;
-        for(Studio s : studios){
-            if(s.getName().equals("Clever Fit")){
-                studio = s;
-            }
-        }
         return ok(studios_kn.render(studios));
     }
     public static Result arme() {return ok(uebungen_arme.render());
