@@ -145,15 +145,13 @@ public class Application extends Controller {
         String email = dynamicForm.get("mail");
         for(User u : user2) {
             if (u.getName().equals(username)) {
-                ok(login.render("Username"));
+                ok(login.render("username"));
             }
             if (u.getEmail().equals(email)) {
                ok(login.render("mail"));
             }
         }
-
-
-            try {
+        try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 UUID id = UUID.randomUUID();
                 User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("password2")));
