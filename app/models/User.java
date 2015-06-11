@@ -63,6 +63,10 @@ public class User {
         return myPlan;
     }
 
+    public Studio getStudio() {
+        return studio;
+    }
+
     public String getName() {
         return name;
     }
