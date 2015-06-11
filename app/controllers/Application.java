@@ -143,16 +143,9 @@ public class Application extends Controller {
                ok(login.render("mail"));
             }
         }
-        try {
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                UUID id = UUID.randomUUID();
-                User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("password2")));
-                Ebean.save(user);
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            return ok(login.render("success"));
-
+        User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("password2")));
+        Ebean.save(user);
+        return ok(login.render("success"));
     }
 
     public static Result searchStudio(String studio) {
@@ -216,19 +209,13 @@ public class Application extends Controller {
         return ok(home.render(loggedInUser));
     }
     public static Result changePassword(){
-        System.out.print("HEY");
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            DynamicForm dynamicForm = Form.form().bindFromRequest();
-            String oldPW = verschluesseln(dynamicForm.get("oldPW"));
-            String newPW = verschluesseln(dynamicForm.get("newPW"));
-            String newRep= verschluesseln(dynamicForm.get("newRep"));
-            System.out.print(oldPW);
-            loggedInUser.changePassword(oldPW, newPW, newRep);
-            Ebean.save(loggedInUser);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        String oldPW = verschluesseln(dynamicForm.get("oldPW"));
+        String newPW = verschluesseln(dynamicForm.get("newPW"));
+        String newRep= verschluesseln(dynamicForm.get("newRep"));
+        System.out.print(oldPW);
+        loggedInUser.changePassword(oldPW, newPW, newRep);
+        Ebean.save(loggedInUser);
         return ok(profil.render(loggedInUser));
     }
 }
