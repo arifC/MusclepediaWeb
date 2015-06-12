@@ -1,5 +1,5 @@
 function changePasswordForm(){
-    $("#changeForm").html("<form method='post' action='/changddePassword' name='changeForm'  onsubmit='return validateChanges()'> <label> Altes Passwort </label>" +
+    $("#changeForm").html("<form method='post' action='/changePassword' name='changeForm'  onsubmit='return validateChanges()'> <label> Altes Passwort </label>" +
     "<input class='form-control' type='password' name='oldPassword' placeholder='Altes Passwort'> <label> Neues Passwort </label>"+
     "<input class='form-control' type='password' name='newPassword' placeholder='Neues Passwort'>"+
        "<label> Neues Passwort wiederholen </label>"+
