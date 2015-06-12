@@ -23,7 +23,7 @@ public class Rating {
     @ManyToOne
     private User user;
     @Constraints.Required
-    private double value;
+    private int value;
 
     public Rating(double facilities, double service, double price, double location){
         this.facilities = facilities;
@@ -32,13 +32,13 @@ public class Rating {
         this.location = location;
     }
 
-    public Rating(Studio studio, User user, double value){
+    public Rating(Studio studio, User user, int value){
         this.studio = studio;
         this.user = user;
         this.value=value;
     }
 
-    public double getValue() {
+    public int getValue() {
         return value;
     }
 

@@ -219,18 +219,19 @@ public class Application extends Controller {
         //schauen ob der User schon eine Bewertung für das gesuchte Studio abgegeben hat
         List<Rating> ratings = Ebean.find(Rating.class).findList();
         String studioname = dynamicForm.get("studio");
-        double rating = Double.parseDouble(dynamicForm.get("value"));
+        int rating = Integer.parseInt(dynamicForm.get("value"));
         boolean ratingAlreadyExists = false;
         boolean valueNotInRange = false;
-        for(Rating r : ratings){
-            if(r.getStudio().getName().equals(studioname) && r.getUser().getName().equals(loggedInUser.getName())){
-                ratingAlreadyExists = true;
+        if (ratings != null) {
+            for (Rating r : ratings) {
+                if (r.getStudio().getName().equals(studioname) && r.getUser().getName().equals(loggedInUser.getName())) {
+                    ratingAlreadyExists = true;
+                }
+            }
+            if (rating > 10 || rating <= 0) {
+                valueNotInRange = true;
             }
         }
-        if(rating > 10 || rating <= 0){
-            valueNotInRange = true;
-        }
-
         if(!ratingAlreadyExists && !valueNotInRange) {
             List<Studio> studios = Ebean.find(Studio.class).findList();
             Studio chosenStudio = null;
