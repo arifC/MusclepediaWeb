@@ -54,11 +54,22 @@ public class Studio {
     }
 
     public void calcAverage2(){
-        double counter = 0;
+        /*double counter = 0;
         double summe=0;
         for(Rating rating : ratings){
             summe += rating.getValue();
             counter++;
+        }
+        totalRating = summe/counter;
+        */
+        double summe = 0;
+        int counter = 0;
+        List<Rating> ratings = Ebean.find(Rating.class).findList();
+        for(Rating r : ratings){
+            if(r.getStudio().getName().equals(this.name)){
+                counter ++;
+                summe = summe + r.getValue();
+            }
         }
         totalRating = summe/counter;
     }
