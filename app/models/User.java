@@ -6,6 +6,7 @@ import play.data.validation.*;
 import javax.persistence.*;
 import javax.swing.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -23,8 +24,8 @@ public class User {
     private String password;
     @ManyToOne
     private Studio studio;
-    @OneToMany
-    private Weight weight;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Weight> weights;
     @OneToOne
     private Plan myPlan;
 
@@ -43,10 +44,12 @@ public class User {
 
     public User(String name, String mail, String password){
         this.benutzer_id = UUID.randomUUID();
+        this.weights=new ArrayList<Weight>();
         this.name = name;
         this.email = mail;
         this.password = password;
         this.myPlan = new Plan("testPlan");
+        this.weights.add(new Weight(100));
         Ebean.save(this.myPlan);
     }
 

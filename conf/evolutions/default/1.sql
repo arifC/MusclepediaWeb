@@ -55,6 +55,7 @@ create table user (
 
 create table weight (
   weight_id                 varchar(40) not null,
+  user_benutzer_id          varchar(40) not null,
   weight                    double,
   date                      datetime,
   date_text                 varchar(255),
@@ -75,6 +76,8 @@ alter table user add constraint fk_user_studio_3 foreign key (studio_studio_id) 
 create index ix_user_studio_3 on user (studio_studio_id);
 alter table user add constraint fk_user_myPlan_4 foreign key (my_plan_plan_id) references plan (plan_id) on delete restrict on update restrict;
 create index ix_user_myPlan_4 on user (my_plan_plan_id);
+alter table weight add constraint fk_weight_user_5 foreign key (user_benutzer_id) references user (benutzer_id) on delete restrict on update restrict;
+create index ix_weight_user_5 on weight (user_benutzer_id);
 
 
 
