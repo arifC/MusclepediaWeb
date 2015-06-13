@@ -95,23 +95,23 @@ public class Application extends Controller {
         return ok(login.render("loginFail"));
     }
 
-    public static Result help() {return ok(help.render());
+    public static Result help() {return ok(help.render(loggedInUser));
     }
-    public static Result oberkoerper() {return ok(uebungen_oberkoerper.render());
+    public static Result oberkoerper() {return ok(uebungen_oberkoerper.render(loggedInUser));
     }
-    public static Result studios(){return ok(studios.render());
+    public static Result studios(){return ok(studios.render(loggedInUser));
     }
     public static Result knStudio(){
         List<Studio> studios = Ebean.find(Studio.class).findList();
-        return ok(studios_kn.render(studios));
+        return ok(studios_kn.render(studios,loggedInUser));
     }
-    public static Result arme() {return ok(uebungen_arme.render());
+    public static Result arme() {return ok(uebungen_arme.render(loggedInUser));
     }
-    public static Result beine() {return ok(uebungen_beine.render());
+    public static Result beine() {return ok(uebungen_beine.render(loggedInUser));
     }
-    public static Result bauch() {return ok(uebungen_bauch.render());
+    public static Result bauch() {return ok(uebungen_bauch.render(loggedInUser));
     }
-    public static Result impressum() {return ok(impressum.render());
+    public static Result impressum() {return ok(impressum.render(loggedInUser));
     }
     public static Result kontakt(){
         checkLogin();
@@ -126,11 +126,11 @@ public class Application extends Controller {
         }
 
     }
-    public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render());
+    public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render(loggedInUser));
     }
-    public static Result plaene_fortgesch(){return ok(plaene_fortgesch.render());
+    public static Result plaene_fortgesch(){return ok(plaene_fortgesch.render(loggedInUser));
     }
-    public static Result plaene_profi() {return ok(plaene_profi.render());
+    public static Result plaene_profi() {return ok(plaene_profi.render(loggedInUser));
     }
 
     public static String verschluesseln(String eingabe){
@@ -247,7 +247,7 @@ public class Application extends Controller {
             return ok(home.render(loggedInUser));
         }else{
             // Hier muss dann noch eine Ausgabe hin: "also Bewertung bereits abgegeben"
-            return ok(studios.render());
+            return ok(studios.render(loggedInUser));
         }
     }
     public static Result changePassword(){

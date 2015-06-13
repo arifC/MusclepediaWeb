@@ -1,5 +1,5 @@
-@(studios : java.util.List[models.Studio])
-@start("Studiosuche"){
+@(studios : java.util.List[models.Studio], user:models.User)
+@start("Studiosuche")(user){
     <div class="row text-center">
         <div class="col-md-8 col-md-offset-2" id="kn">
             <h1> Studios in Konstanz</h1>

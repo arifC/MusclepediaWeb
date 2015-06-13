@@ -23,4 +23,16 @@ h4 {
 
 #kalerg, #bmierg {
     font-size: large;
+
+}
+#loggedInAs {
+    color: gray;
+    position: absolute;
+    right: 4em;
+    top: 2em;
+}
+#logout{
+    position: absolute;
+    right: 10.5em;
+    top: 3.5em;
 }

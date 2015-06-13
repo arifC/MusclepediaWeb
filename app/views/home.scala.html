@@ -1,5 +1,5 @@
 @(user: models.User)
-@start("Musclepedia"){
+@start("Musclepedia")(user){
 <div role="tabpanel" class="tab-pane">
     <div class="row">
         <div class="col-md-8">
@@ -8,14 +8,11 @@
                             Lernen Sie sowhl neue Übungen, als auch Trainingspläne kennen, oder stellen
                             Sie sich ganz einfach Ihren individuellen Plan zusammen.</p>
                         <br/>
-                        <h3>Eingeloggt als:
-                            @(user.getName())
-                </h3>
-            }
 
-        </div>
-        <div class="col-md-4">
-            <img src="@routes.Assets.at("images/home_bild.jpg")" id="home_img_1"/>
+            }
+            <div class="col-md-4">
+                <img src="@routes.Assets.at("images/home_bild.jpg")" id="home_img_1"/>
+            </div>
         </div>
     </div>
 </div>

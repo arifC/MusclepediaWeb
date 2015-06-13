@@ -1,4 +1,5 @@
-@start("Musclepedia"){
+@(user:models.User)
+@start("Musclepedia")(user){
     <script src="@routes.Assets.at("javascripts/help_bmi.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/help_kalrechner.js")" type="text/javascript"></script>
     <div class="row text-left">
