@@ -48,6 +48,15 @@
                     @if(message.equals("loginFail")){
                         <h2>Fehler: Anmeldung fehlgeschlagen</h2>
                     }
+                    @if(message.equals("username")){
+                        <h2>Benutzername wird bereits verwendet</h2>
+                    }
+                    @if(message.equals("mail")){
+                        <h2>Email wird bereits verwendet</h2>
+                    }
+                    @if(message.equals("success")){
+                        <h2>Erfolgreich registriert</h2>
+                    }
                 </div>
             </div>
 

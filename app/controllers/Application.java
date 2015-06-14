@@ -153,10 +153,11 @@ public class Application extends Controller {
         String email = dynamicForm.get("mail");
         for(User u : user2) {
             if (u.getName().equals(username)) {
-                ok(login.render("username"));
+                return ok(login.render("username"));
+
             }
             if (u.getEmail().equals(email)) {
-               ok(login.render("mail"));
+               return ok(login.render("mail"));
             }
         }
         User user = new User(dynamicForm.get("benutzername"), dynamicForm.get("mail"), verschluesseln(dynamicForm.get("password2")));
