@@ -95,23 +95,38 @@ public class Application extends Controller {
         return ok(login.render("loginFail"));
     }
 
-    public static Result help() {return ok(help.render(loggedInUser));
+    public static Result help() {
+        checkLogin();
+        return ok(help.render(loggedInUser));
     }
-    public static Result oberkoerper() {return ok(uebungen_oberkoerper.render(loggedInUser));
+    public static Result oberkoerper() {
+        checkLogin();
+        return ok(uebungen_oberkoerper.render(loggedInUser));
     }
-    public static Result studios(){return ok(studios.render(loggedInUser));
+    public static Result studios(){
+        checkLogin();
+        return ok(studios.render(loggedInUser));
     }
     public static Result knStudio(){
         List<Studio> studios = Ebean.find(Studio.class).findList();
+        checkLogin();
         return ok(studios_kn.render(studios,loggedInUser));
     }
-    public static Result arme() {return ok(uebungen_arme.render(loggedInUser));
+    public static Result arme() {
+        checkLogin();
+        return ok(uebungen_arme.render(loggedInUser));
     }
-    public static Result beine() {return ok(uebungen_beine.render(loggedInUser));
+    public static Result beine() {
+        checkLogin();
+        return ok(uebungen_beine.render(loggedInUser));
     }
-    public static Result bauch() {return ok(uebungen_bauch.render(loggedInUser));
+    public static Result bauch() {
+        checkLogin();
+        return ok(uebungen_bauch.render(loggedInUser));
     }
-    public static Result impressum() {return ok(impressum.render(loggedInUser));
+    public static Result impressum() {
+        checkLogin();
+        return ok(impressum.render(loggedInUser));
     }
     public static Result kontakt(){
         checkLogin();
@@ -126,11 +141,17 @@ public class Application extends Controller {
         }
 
     }
-    public static Result plaene_anfaenger(){return ok(plaene_anfaenger.render(loggedInUser));
+    public static Result plaene_anfaenger(){
+        checkLogin();
+        return ok(plaene_anfaenger.render(loggedInUser));
     }
-    public static Result plaene_fortgesch(){return ok(plaene_fortgesch.render(loggedInUser));
+    public static Result plaene_fortgesch(){
+        checkLogin();
+        return ok(plaene_fortgesch.render(loggedInUser));
     }
-    public static Result plaene_profi() {return ok(plaene_profi.render(loggedInUser));
+    public static Result plaene_profi() {
+        checkLogin();
+        return ok(plaene_profi.render(loggedInUser));
     }
 
     public static String verschluesseln(String eingabe){
@@ -167,9 +188,10 @@ public class Application extends Controller {
 
     public static Result searchStudio(String studio) {
         String result = "";
+
         switch (studio){
             case "k":
-                result ="konstanz";
+                result ="Konstanz";
         }
         return ok(result);
     }
@@ -254,7 +276,7 @@ public class Application extends Controller {
     public static Result changePassword(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String oldPW = verschluesseln(dynamicForm.get("oldPassword"));
-
+        checkLogin();
         if(oldPW.equals(loggedInUser.getPassword())){
             String newPW = verschluesseln(dynamicForm.get("newPassword"));
             loggedInUser.setPassword(newPW);
@@ -274,6 +296,7 @@ public class Application extends Controller {
     public static Result myStudio() {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String studioName = dynamicForm.get("studio");
+        checkLogin();
         for(Studio studio : Ebean.find(models.Studio.class).findList()){
             if(studio.getName().equals(studioName)){
                 loggedInUser.setStudio(studio);
