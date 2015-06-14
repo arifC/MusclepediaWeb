@@ -187,11 +187,14 @@ public class Application extends Controller {
     }
 
     public static Result searchStudio(String studio) {
-        String result = "";
+        String result=" ";
+        List<Studio> studios = Ebean.find(Studio.class).findList();
+        for (Studio s: studios) {
+            if (s.getOrt().toUpperCase().startsWith(studio.toUpperCase())) {
+                result=s.getOrt();
+                return ok(result);
+            }
 
-        switch (studio){
-            case "k":
-                result ="Konstanz";
         }
         return ok(result);
     }
