@@ -37,7 +37,7 @@ public class Studio {
         this.studio_id = UUID.randomUUID();
     }
 
-    public void calcAverage(){
+        public void calcAverage(){
         double counter = 0;
         for(Rating rating : ratings){
             this.totalFacilities += rating.getFacilities();

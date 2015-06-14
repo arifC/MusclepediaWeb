@@ -108,7 +108,13 @@ public class Application extends Controller {
         return ok(studios.render(loggedInUser));
     }
     public static Result knStudio(){
-        List<Studio> studios = Ebean.find(Studio.class).findList();
+
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        String studio = dynamicForm.get("searchStudio");
+        List<Studio> studios = Ebean.find(Studio.class).where().eq("ort", studio).findList();
+        if(studio==null) {
+            studios= Ebean.find(Studio.class).findList();
+        }
         checkLogin();
         return ok(studios_kn.render(studios,loggedInUser));
     }

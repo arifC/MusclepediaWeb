@@ -5,7 +5,11 @@
         <div class="row text-center">
             <div class="col-md-8 col-md-offset-2" id="studios">
                 <p> Hier kannst du Auswählen aus welchen Ort du Studios ansehen und bewerten willst derzeit haben wir Studios aus folgenden Orten in unserer Datenbank: </p>
-                <p>Ort: <input type="text" id="searchStudio" name="searchStudio" placeholder="Ort" onkeyup="sendSearch()"/></p>
+                <form method="GET" action="/knstudio" name="searchForm">
+                <p>Ort: <input type="text" id="searchStudio" name="searchStudio" placeholder="Ort" onkeyup="sendSearch()"/>
+                    <input type="submit" name="cancel" value="Ansehen" class="btn btn-primary">
+                </p>
+                </form>
                 <span id="output"></span>
                 <p><a href="/knstudio ">Konstanz </a></p>
                 <p><a href="/knstudio">Radolfzell </a></p>
