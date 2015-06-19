@@ -276,7 +276,8 @@ public class Application extends Controller {
             Rating rating2 = new Rating(chosenStudio, loggedInUser, rating);
             Ebean.save(rating2);
             loggedInUser.rateStudio(chosenStudio, rating2);
-            return ok(home.render(loggedInUser));
+            List<Studio> s = Ebean.find(Studio.class).where().eq("ort", "Konstanz").findList();
+            return ok(studios_kn.render(s,loggedInUser));
         }else{
             // Hier muss dann noch eine Ausgabe hin: "also Bewertung bereits abgegeben"
             return ok(studios.render(loggedInUser));

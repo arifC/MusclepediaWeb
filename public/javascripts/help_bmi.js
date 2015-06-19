@@ -32,10 +32,10 @@ function calcBMI(){
             if(bmi>=19 && bmi<24){
                 $("#bmierg").html("Normalgewichtig der BMI liegt bei:"+bmi);
             }
-            if(bmi>=24 && bmi<30){
+            if(bmi>=24 && bmi<28){
                 $("#bmierg").html("Leichtes Übergewicht der BMI liegt bei:"+bmi);
             }
-            if(bmi>=30 && bmi<40){
+            if(bmi>=28 && bmi<40){
                 $("#bmierg").html("Übergewichtig der BMI liegt bei:"+bmi);
             }
             if(bmi>=40){

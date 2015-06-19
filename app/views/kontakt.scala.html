@@ -1,5 +1,13 @@
 @(user: models.User)
 @start("Kontakt")(user){
+    <script type="text/javascript">
+        function sendMail(){
+            alert('mailto:' + @user.getEmail() + '?subject=' + $('#surname').val() + '&body=' + $('#contact').val());
+             $('#mailform').attr('action', 'mailto:' + @user.getEmail() + '?subject=' + $('#surname').val() + '&body=' + $('#contact').val());
+             $('#mailform').submit();
+        }
+
+    </script>
     <div class="row">
         <div class="col-md-8">
             <form method="post" id="mailform">
@@ -7,22 +15,22 @@
                 <p> E-Mail:<input type="email" required> An diese Adresse wird die Antwort geschrieben </p>
                 <p>Ihre Nachricht an uns:</p> <textarea id="contact" cols="40" rows="5" maxlength="145"></textarea>
                 <p> Wir setzen uns so schnell wie möglich mit ihnen in Verbindung. Dieser Vorgang kann aber einige Tage dauern</p>
-                <button type="button" id="mail"  class="btn btn-primary" name="mail">Abschicken </button>
+                <input type="button" id="mail" onclick="test()" class="btn btn-primary" name="mail" value="Abschicken"/>
             </form>
         </div>
     </div>
     <script>
 
-        $(document).ready(function() {
+
+
+        /*$(document).ready(function() {
             $('#mail').click(function() {
                 $('#mailform').attr('action',
                        'mailto:'@user.getEmail()'?subject=' +
                        $('#surname').val() + '&body=' + $('#contact').val();
                         $('#mailform').submit();
                         });;
-        });
-
-
+        });*/
     </script>
-
+    <script src="@routes.Assets.at("javascripts/test.js")"></script>
 }
