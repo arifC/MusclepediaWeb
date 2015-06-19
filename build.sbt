@@ -12,7 +12,8 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   ws,
-  "mysql" % "mysql-connector-java" % "5.1.34"
+  "mysql" % "mysql-connector-java" % "5.1.34",
+  "com.typesafe.play" %% "play-mailer" % "2.4.1"
   //"org.xerial" % "sqlite-jdbc" % "3.7.15-M1"
 )
 

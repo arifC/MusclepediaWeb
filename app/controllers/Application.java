@@ -249,9 +249,15 @@ public class Application extends Controller {
     public static Result rateStudio(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         //schauen ob der User schon eine Bewertung für das gesuchte Studio abgegeben hat
+        int rating = 0;
         List<Rating> ratings = Ebean.find(Rating.class).findList();
         String studioname = dynamicForm.get("studio");
-        int rating = Integer.parseInt(dynamicForm.get("value"));
+        try {
+            rating = Integer.parseInt(dynamicForm.get("value"));
+        }catch(NumberFormatException e){
+            checkLogin();
+            return ok(studios.render(loggedInUser));
+        }
         boolean ratingAlreadyExists = false;
         boolean valueNotInRange = false;
         if (ratings != null) {
