@@ -325,7 +325,7 @@ public class Application extends Controller {
         return ok(profil.render(loggedInUser));
     }
 
-    
+
 
     /*private final MailerClient mailer;
 
