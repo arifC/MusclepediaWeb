@@ -26,7 +26,7 @@ GET         /myStudio                    controllers.Application.myStudio()
 POST        /createUser                  controllers.Application.createUser()
 POST        /start                       controllers.Application.start()
 POST        /changePassword              controllers.Application.changePassword()
-
+GET         /sendMail                    controllers.Application.sendMail()
 #AJAX
 GET         /searchStudio                controllers.Application.searchStudio(value)
 # Map static resources from the /public folder to the /assets URL path

@@ -13,6 +13,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
+//import play.libs.mailer.Email;
+//import play.api.libs.mailer.MailerClient;
+//import javax.inject.Inject;
+
 
 public class Application extends Controller {
 
@@ -320,4 +324,36 @@ public class Application extends Controller {
         }
         return ok(profil.render(loggedInUser));
     }
+
+    
+
+    /*private final MailerClient mailer;
+
+    @Inject
+    public ApplicationJava(MailerClient mailer) {
+        this.mailer = mailer;
+    }*/
+
+    public static Result sendMail(){
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        String firstName = dynamicForm.get("name");
+        String lastName =dynamicForm.get("surname");
+        String answerMail= dynamicForm.get("answerMail");
+        String content=dynamicForm.get("mailContent");
+
+
+        /*
+            final Email email = new Email();
+            email.setSubject("Kontakt Anfrage");
+            email.setFrom("Server FROM <from@email.com>");
+            email.addTo("Admin TO <to@email.com>");
+             email.setBodyText("Anfrage von: " +firstName +" " + lastName +" "+ answerMail +" " +content);
+             mailer.send(email);
+
+         */
+
+
+        return ok(home.render(loggedInUser));
+    }
+
 }
