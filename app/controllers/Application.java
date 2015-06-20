@@ -355,5 +355,27 @@ public class Application extends Controller {
 
         return ok(home.render(loggedInUser));
     }
+    public static Result checkName(String input){
+        String result ="";
+        if(input.equals("")){
+            return ok(" ");
+        }
+        if(input.length()<=5){
+            result="Benutzername muss 6 Zeichen haben";
+            return ok(result);
+        }
+        return ok(result);
+    }
+    public static Result checkPassword(String input){
+        String result =" ";
+        if(input.equals("")){
+            return ok(" ");
+        }
+        if(input.length()<=4){
+            result="Kurze Passwörter sind unsicher!";
+            return ok(result);
+        }
+        return ok(result);
+    }
 
 }

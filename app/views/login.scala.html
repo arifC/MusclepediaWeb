@@ -1,5 +1,6 @@
 @(message: String)
 @firstPage("Musclepedia"){
+    <script src="@routes.Assets.at("javascripts/login_AJAX.js")" type="text/javascript"></script>
     <div class="row text-center">
 
         <div id="content">
@@ -29,14 +30,13 @@
                         <div class="form-group">
                             <h3>Registrieren</h3>
                             <label for="regName">Benutzername</label>
-                            <input id="regName" name="benutzername" class="form-control" type="text" placeholder="Benutzername"/>
-
+                            <input id="regName" name="benutzername" class="form-control" type="text" placeholder="Benutzername" onkeyup="nameCheck()"/>
+                            <div id="nameOutput"> </div>
                             <label for="regPass">Passwort</label>
-                            <input id="regPass" name="password" class="form-control" type="password" placeholder="Passwort"/>
-
+                            <input id="regPass" name="password" class="form-control" type="password" placeholder="Passwort" onkeyup="passwordCheck()" />
+                            <div id="passwordOutput"></div>
                             <label for="regPass2">Passwort wiederholen</label>
                             <input id="regPass2" class="form-control" type="password" name="password2" placeholder="Passwort wiederholen"/>
-
                             <label for="regEmail">Email-Adresse</label>
                             <input id="regEmail" class="form-control" type="email" name="mail" placeholder="E-Mail Adresse"/>
                             <br/>

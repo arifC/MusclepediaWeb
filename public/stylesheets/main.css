@@ -39,3 +39,9 @@ h4 {
 .loginFehler{
     color: red;
 }
+#nameOutput{
+    color:red;
+}
+#passwordOutput{
+    color:red;
+}
