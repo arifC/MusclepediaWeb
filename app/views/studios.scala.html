@@ -1,20 +1,27 @@
 @(user:models.User)
 @start("Studiosuche")(user){
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="@routes.Assets.at("javascripts/studio_AJAX.js")" type="text/javascript"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+    $(function() {
+    $( "#searchStudio" ).autocomplete({
+    source: ["Konstanz", "Radolfzell", "Singen","Hegne","Bergdorf"]
+    });
+    });
+    </script>
     <div class="col-md-8">
         <div class="row text-center">
             <div class="col-md-8 col-md-offset-2" id="studios">
+                <div class="ui-widget">
                 <p> Hier kannst du Auswählen aus welchen Ort du Studios ansehen und bewerten willst derzeit haben wir Studios aus folgenden Orten in unserer Datenbank: </p>
                 <form method="GET" action="/knstudio" name="searchForm">
-                <p>Ort: <input type="text" id="searchStudio" name="searchStudio" placeholder="Ort" onkeyup="sendSearch()"/>
+                    <label for="searchStudio"> Orte:</label>
+                 <input type="text" id="searchStudio" name="searchStudio" placeholder="Ort"/>
                     <input type="submit" name="cancel" value="Ansehen" class="btn btn-primary">
-                </p>
                 </form>
-                <span id="output"></span>
-                <p><a href="/knstudio ">Konstanz </a></p>
-                <p><a href="/knstudio">Radolfzell </a></p>
-                <p><a href="/knstudio">Singen </a></p>
-                <p>Sollten noch einige Studios fehlen wende dich an unseren Kontakt(Eventuell bauen wir hier noch eine Funktion ein) </p>
+                </div>
              </div>
         </div>
     </div>
