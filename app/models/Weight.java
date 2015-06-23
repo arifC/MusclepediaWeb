@@ -24,14 +24,14 @@ public class Weight {
     public Weight(double weight){
         this.weight = weight;
         this.date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-YYYY");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd. MMMM YYYY HH:mm");
         this.dateText = sdf.format(date);
     }
 
     public Weight(double weight, Date date){
         this.weight = weight;
         this.date = date;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-YYYY");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd. MMMM YYYY HH:mm");
         this.dateText = sdf.format(date);
     }
 

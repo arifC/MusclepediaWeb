@@ -1,6 +1,5 @@
 @(user: models.User)
 @start("Musclepedia")(user){
-
     <div>
         <div class="col-md-6">
             <div role="tabpanel" class="tab-pane">
@@ -29,8 +28,7 @@
             </div>
         </div>
         <div class="col-md-6" id="changeForm">
-
-            <input type="button" value="Neues Passwort festlegen" onclick="changePasswordForm()"/>
+            <input type="button" class="btn btn-success" value="Neues Passwort festlegen" onclick="changePasswordForm()"/>
         </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
@@ -46,8 +44,29 @@
             </div>
         }
     </div>
-    <script type="text/javascript" src="@routes.Assets.at("javascripts/changePassword.js")"></script>
-
-
-
+    <br/>
+    <div class="col-md-8 col-md-offset-2">
+        @if(user.showWeights() != null){
+            <div  class="text-center">
+                <table border="2" class="table table-striped">
+                    <caption> <h3>Mein Gewicht</h3> </caption>
+                    <th  class="text-center">Datum</th><th  class="text-center">Gewicht [kg]</th>
+                    @for(w <- user.showWeights()){
+                        <tr><td>@w.getDateText</td><td>@w.getWeight</td></tr>
+                    }
+                </table>
+            </div>
+        }
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <form action="/addWeight">
+            Gewicht: <input type="number" name="weight"/>
+            <br/>
+            <p></p>
+            <input type="submit" class="btn btn-success" value="Gewicht hinzufuegen"/>
+        </form>
+    </div>
+    <br/>
+    <a href="/generatePDF">Als PDF exportieren</a>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/changePassword.js")"/>
 }

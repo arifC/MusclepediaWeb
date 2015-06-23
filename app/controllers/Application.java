@@ -6,7 +6,7 @@ import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.*;
 import play.data.Form;
-
+import it.innove.PdfGenerator;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -378,4 +378,14 @@ public class Application extends Controller {
         return ok(result);
     }
 
+    public static Result addWeight() {
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        double weight = Double.parseDouble(dynamicForm.get("weight"));
+        loggedInUser.addWeight(weight);
+        return ok(profil.render(loggedInUser));
+    }
+
+    public static Result generatePDF() {
+            return PdfGenerator.ok(profil.render(loggedInUser), "http://localhost:9000");
+    }
 }

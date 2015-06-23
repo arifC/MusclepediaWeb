@@ -42,6 +42,14 @@ public class User {
         return email;
     }
 
+    public void addWeight(double w){
+        Weight weight = new Weight(w);
+        this.weights.add(weight);
+    }
+    public List<Weight> showWeights() {
+        return weights;
+    }
+
     public User(String name, String mail, String password){
         this.benutzer_id = UUID.randomUUID();
         this.weights=new ArrayList<Weight>();
