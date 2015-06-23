@@ -28,7 +28,7 @@ POST        /start                       controllers.Application.start()
 POST        /changePassword              controllers.Application.changePassword()
 GET         /sendMail                    controllers.Application.sendMail()
 GET         /addWeight                   controllers.Application.addWeight()
-GET /generatePDF    controllers.Application.generatePDF()
+#GET /generatePDF    controllers.Application.generatePDF()
 #AJAX
 GET         /searchStudio                controllers.Application.searchStudio(value)
 GET         /checkName                   controllers.Application.checkName(value)
