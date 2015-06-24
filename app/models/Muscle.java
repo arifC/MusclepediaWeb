@@ -5,5 +5,9 @@ package models;
  */
 
 public enum Muscle {
+    /**
+     * Gibt die Körperteile als Enum an
+     *
+     */
     Arme, Bauch, Beine, Oberkoerper
 }
