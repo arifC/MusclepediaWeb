@@ -144,8 +144,7 @@ public class Application extends Controller {
     }
     public static Result profil(){
         if(checkLogin()){
-            List<Weight> weights = Ebean.find(Weight.class).findList();
-            return ok(profil.render(weights,loggedInUser));
+            return ok(profil.render(getWeights(),loggedInUser));
         }
         else{
             return redirect("/");
@@ -248,8 +247,7 @@ public class Application extends Controller {
         }
         checkLogin();
         loggedInUser.deleteFromPlan(uebungsauswahl);
-        List<Weight> weights = Ebean.find(Weight.class).findList();
-        return ok(profil.render(weights,loggedInUser));
+        return ok(profil.render(getWeights(),loggedInUser));
     }
 
     public static Result rateStudio(){
@@ -299,14 +297,13 @@ public class Application extends Controller {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String oldPW = verschluesseln(dynamicForm.get("oldPassword"));
         checkLogin();
-        List<Weight> weights = Ebean.find(Weight.class).findList();
         if(oldPW.equals(loggedInUser.getPassword())){
             String newPW = verschluesseln(dynamicForm.get("newPassword"));
             loggedInUser.setPassword(newPW);
-            return ok(profil.render(weights,loggedInUser));
+            return ok(profil.render(getWeights(),loggedInUser));
         }
         else{
-            return ok(profil.render(weights,loggedInUser));
+            return ok(profil.render(getWeights(),loggedInUser));
         }
 
     }
@@ -325,8 +322,7 @@ public class Application extends Controller {
                 loggedInUser.setStudio(studio);
             }
         }
-        List<Weight> weights = Ebean.find(Weight.class).findList();
-        return ok(profil.render(weights,loggedInUser));
+        return ok(profil.render(getWeights(),loggedInUser));
     }
 
 
@@ -388,7 +384,11 @@ public class Application extends Controller {
         loggedInUser.addWeight(weight, loggedInUser);
 
         List<Weight> weights = Ebean.find(Weight.class).findList();
-        return ok(profil.render(weights , loggedInUser));
+        return ok(profil.render(getWeights() , loggedInUser));
+    }
+
+    public static List<Weight> getWeights(){
+        return Ebean.find(Weight.class).findList();
     }
 
     /*public static Result generatePDF() {
