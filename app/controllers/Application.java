@@ -313,8 +313,8 @@ public class Application extends Controller {
     }
 
     /**
-     *
-     * @return
+     * Wenn auf eine Button "Hinzufügen" gekklickt wird, wird hier die richtige Übung aus der Datenbank rausgesucht und unter dem User abgespeichert
+     * @return Menupunkt Home
      */
     public static Result addExercise(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -331,6 +331,10 @@ public class Application extends Controller {
         return ok(home.render(loggedInUser));
     }
 
+    /**
+     * Wenn neben einer Übung auf "Löschen" geklickt wird, wird hier diese Übung aus dem plan des Users gelöscht
+     * @return Menupunkt Profil
+     */
     public static Result deleteExercise(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         List<Exercise> uebungen = Ebean.find(Exercise.class).findList();
@@ -346,6 +350,11 @@ public class Application extends Controller {
         return ok(profil.render(getWeights(),loggedInUser));
     }
 
+    /**
+     * Wenn ein User ein Studio bewerten will wird diese Methode aufgerufen. Zuerst Prüfung (serverseitig) ob die Bewertung im zulässigen Rahmen ist
+     * und ob der User schon eine Bewertung für das jeweilige Studio abgegeben hat oder nicht
+     * @return Bewertung abgeben erfolgreich: render("studios_kn"), nicht erfolgreich: render("stuidos")
+     */
     public static Result rateStudio(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         //schauen ob der User schon eine Bewertung für das gesuchte Studio abgegeben hat
@@ -389,6 +398,12 @@ public class Application extends Controller {
             return ok(studios.render(loggedInUser));
         }
     }
+
+    /**
+     * Wenn der User das Formular richtig ausgefüllt hat, sprich sein altes Passwort korrekt eingegeben hat (Vergleich mit Daten aus der Datenbank),
+     * dann wird sein Passwort neu gesetzt
+     * @return Menupunkt Profil
+     */
     public static Result changePassword(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String oldPW = verschluesseln(dynamicForm.get("oldPassword"));
@@ -404,6 +419,10 @@ public class Application extends Controller {
 
     }
 
+    /**
+     * Session wird geleert
+     * @return zurück zur Defaultseite (Startseite)
+     */
     public static Result logout() {
         session().clear();
         return redirect("/");
