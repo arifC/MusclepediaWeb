@@ -20,14 +20,19 @@ import java.util.Locale;
 
 public class Application extends Controller {
 
+    /**
+     * verweist auf den aktuellen User aus der Datenbank
+     */
     public static User loggedInUser = null;
 
-
+    /**
+     * überprüft ob ein Username in der Session abgespeicher ist
+     * falls nicht, wird der aktuelle user in der Session gespeichert
+     * @return false falls kein user in der Session gespeichert ist, true falls doch
+     */
     public static boolean checkLogin(){
         String username = session("username");
-        System.out.print("SESSIONNAME:" + username);
         if(username == null){
-            System.out.print("REDIRECT");
             return false;
         }
         else{
@@ -43,8 +48,15 @@ public class Application extends Controller {
 
     }
 
+    /**
+     * aufgerufen falls angegebener Pfad "/" ist
+     * @return lädt die Defaultseite (Loginseite)
+     */
     public static Result login(){return ok(login.render(" "));}
 
+    /**
+     * speichert initial Studio- und Übungsdaten in der Datenbank ab
+     */
     public static void buildDatabase(){
         //Studios
         Studio clever_konstanz = new Studio("Clever Fit", "Rudolph-Diesel-Str.", 78462, "Konstanz");
@@ -64,6 +76,11 @@ public class Application extends Controller {
 
     }
 
+    /**
+     * Sucht aus der Datenbank alle User und vergleicht mit den eingegebenen Logindaten.
+     * Falls solch ein User exisitiert, wird die Homeseite aufgerufen und der User in der Session gespeichert
+     * @return Leitet den Benutzer bei erfolgreichem Login auf die Home-Seite
+     */
     public static Result start() {
         boolean foundUser = false;
         DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -99,18 +116,28 @@ public class Application extends Controller {
         return ok(login.render("loginFail"));
     }
 
+    /**
+     * leitet den User auf die Hilfe-Seite weiter
+     * @return Menupunkt Hilfe
+     */
     public static Result help() {
         checkLogin();
         return ok(help.render(loggedInUser));
     }
-    public static Result oberkoerper() {
-        checkLogin();
-        return ok(uebungen_oberkoerper.render(loggedInUser));
-    }
+
+    /**
+     * leitet den User auf die Studios-Seite weiter
+     * @return Menupunkt Studios
+     */
     public static Result studios(){
         checkLogin();
         return ok(studios.render(loggedInUser));
     }
+
+    /**
+     * leitet einen auf die Studios-Konstan-Seite weiter wenn Konstanz als Stadt ausgewählt wurde
+     * @return Menupunkt Studios in Konstanz
+     */
     public static Result knStudio(){
 
         DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -121,6 +148,12 @@ public class Application extends Controller {
         }
         checkLogin();
         return ok(studios_kn.render(studios,loggedInUser));
+    }
+
+
+    public static Result oberkoerper() {
+        checkLogin();
+        return ok(uebungen_oberkoerper.render(loggedInUser));
     }
     public static Result arme() {
         checkLogin();
@@ -324,9 +357,6 @@ public class Application extends Controller {
         }
         return ok(profil.render(getWeights(),loggedInUser));
     }
-
-
-
     /*private final MailerClient mailer;
 
     @Inject
