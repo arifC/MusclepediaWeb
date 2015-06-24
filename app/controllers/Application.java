@@ -150,31 +150,61 @@ public class Application extends Controller {
         return ok(studios_kn.render(studios,loggedInUser));
     }
 
-
+    /**
+     * leitet den User auf die Oberkörper-Seite
+     * @return Menupunkt Übungen/Oberkörper
+     */
     public static Result oberkoerper() {
         checkLogin();
         return ok(uebungen_oberkoerper.render(loggedInUser));
     }
+    /**
+     * leitet den User auf die Arme-Seite
+     * @return Menupunkt Übungen/Arme
+     */
     public static Result arme() {
         checkLogin();
         return ok(uebungen_arme.render(loggedInUser));
     }
+    /**
+     * leitet den User auf die Beine-Seite
+     * @return Menupunkt Übungen/Beine
+     */
     public static Result beine() {
         checkLogin();
         return ok(uebungen_beine.render(loggedInUser));
     }
+    /**
+     * leitet den User auf die Bauch-Seite
+     * @return Menupunkt Übungen/Bauch
+     */
     public static Result bauch() {
         checkLogin();
         return ok(uebungen_bauch.render(loggedInUser));
     }
+
+    /**
+     * Leitet den User auf die Impressum-Seite weiter
+     * @return lädt Impressum-Seite
+     */
     public static Result impressum() {
         checkLogin();
         return ok(impressum.render(loggedInUser));
     }
+
+    /**
+     * leitet den User auf die Kontaktseite weiter
+     * @return lädt Kontakt-Seite
+     */
     public static Result kontakt(){
         checkLogin();
         return ok(kontakt.render(loggedInUser));
     }
+
+    /**
+     * Leitet den User auf die Profil-Seite weiter
+     * @return läd die Profil-Seite und übergibt alle Weights aus der Datenbank plus den user
+     */
     public static Result profil(){
         if(checkLogin()){
             return ok(profil.render(getWeights(),loggedInUser));
@@ -184,19 +214,37 @@ public class Application extends Controller {
         }
 
     }
+
+    /**
+     * Leitet den User auf die pläne/anfänger-Seite weiter
+     * @return
+     */
     public static Result plaene_anfaenger(){
         checkLogin();
         return ok(plaene_anfaenger.render(loggedInUser));
     }
+    /**
+     * Leitet den User auf die pläne/fortgeschritten-Seite weiter
+     * @return
+     */
     public static Result plaene_fortgesch(){
         checkLogin();
         return ok(plaene_fortgesch.render(loggedInUser));
     }
+    /**
+     * Leitet den User auf die pläne/profi-Seite weiter
+     * @return
+     */
     public static Result plaene_profi() {
         checkLogin();
         return ok(plaene_profi.render(loggedInUser));
     }
 
+    /**
+     * Beim Regisitrieren wird das passwort durch diese Methode verschlüsselt und in der Datenbank abgespeichert
+     * @param eingabe passwort als String
+     * @return mit MD5 verschlüsselten HashCode
+     */
     public static String verschluesseln(String eingabe){
         String result = null;
         MessageDigest md;
@@ -208,8 +256,12 @@ public class Application extends Controller {
             throw new IllegalStateException(e);
         }
         return result;
-
     }
+
+    /**
+     * leitet den User zur Loginseite mit entsprechender Meldung ob Registrierung erfolgreich war oder nicht
+     * @return render("username") falls name schon vergeben, render("mail") falls mail schon vergeben, render("success") falls erfolgreich
+     */
     public static Result createUser(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         List<User> user2 = Ebean.find(User.class).findList();
@@ -229,6 +281,11 @@ public class Application extends Controller {
         return ok(login.render("success"));
     }
 
+    /**
+     *
+     * @param studio
+     * @return
+     */
     public static Result searchStudio(String studio) {
         String result=" ";
         List<Studio> studios = Ebean.find(Studio.class).findList();
@@ -242,6 +299,10 @@ public class Application extends Controller {
         return ok(result);
     }
 
+    /**
+     * Um zurück auf die Home-Seite zu gelangen
+     * @return Menupunkt Home
+     */
     public static Result home() {
         if(checkLogin()){
             return ok(home.render(loggedInUser));
@@ -251,9 +312,11 @@ public class Application extends Controller {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static Result addExercise(){
-        Exercise beispiel = new Exercise("szcurls");
-        Ebean.save(beispiel);
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         List<Exercise> uebungen = Ebean.find(Exercise.class).findList();
         String auswahl = dynamicForm.get("auswahl");
