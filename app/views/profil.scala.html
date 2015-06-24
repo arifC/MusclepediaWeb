@@ -1,4 +1,4 @@
-@(user: models.User)
+@(weights : java.util.List[models.Weight], user: models.User)
 @start("Musclepedia")(user){
     <div>
         <div class="col-md-6">
@@ -46,20 +46,18 @@
     </div>
     <br/>
     <div class="col-md-8 col-md-offset-2">
-        @if(user.showWeights() != null){
-            <div  class="text-center">
-                <table border="2" class="table table-striped">
-                    <caption> <h3>Mein Gewicht</h3> </caption>
-                    <th  class="text-center">Datum</th><th  class="text-center">Gewicht [kg]</th>
-                    @for(w <- user.showWeights()){
-                        <tr><td>@w.getDateText</td><td>@w.getWeight</td></tr>
-                    }
-                </table>
-            </div>
+        <table border="2" class="table table-striped">
+            <caption> <h3>Gewichtüberwachung</h3> </caption>
+            <th> Datum </th><th> Gewicht</th>
+        @for(w <- weights){
+            @if(w.getUser().getName().equals(user.getName)){
+                <tr><td>@w.getDate</td> <td>@w.getWeight()</td> </tr>
+            }
         }
+        </table>
     </div>
     <div class="col-md-8 col-md-offset-2">
-        <form action="/addWeight">
+        <form method="get" action="/addWeight">
             Gewicht: <input type="number" name="weight"/>
             <br/>
             <p></p>

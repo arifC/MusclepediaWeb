@@ -42,9 +42,10 @@ public class User {
         return email;
     }
 
-    public void addWeight(double w){
-        Weight weight = new Weight(w);
+    public void addWeight(double w, User user){
+        Weight weight = new Weight(w, user);
         this.weights.add(weight);
+
     }
     public List<Weight> showWeights() {
         return weights;
@@ -57,7 +58,7 @@ public class User {
         this.email = mail;
         this.password = password;
         this.myPlan = new Plan("testPlan");
-        this.weights.add(new Weight(100));
+        //this.weights.add(new Weight(100));
         Ebean.save(this.myPlan);
     }
 

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import com.avaje.ebean.Ebean;
 import play.data.validation.*;
 
 import javax.persistence.*;
@@ -20,12 +21,16 @@ public class Weight {
     private double weight;
     private Date date;
     private String dateText;
+    @ManyToOne
+    private User user;
 
-    public Weight(double weight){
+    public Weight(double weight, User user){
         this.weight = weight;
         this.date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd. MMMM YYYY HH:mm");
         this.dateText = sdf.format(date);
+        this.user = user;
+        Ebean.save(this);
     }
 
     public Weight(double weight, Date date){
@@ -59,5 +64,9 @@ public class Weight {
         this.date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MMMM-YYYY");
         this.dateText = sdf.format(date);
+    }
+
+    public User getUser() {
+        return user;
     }
 }

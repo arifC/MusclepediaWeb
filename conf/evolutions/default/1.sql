@@ -55,10 +55,10 @@ create table user (
 
 create table weight (
   weight_id                 varchar(40) not null,
-  user_benutzer_id          varchar(40) not null,
   weight                    double,
   date                      datetime,
   date_text                 varchar(255),
+  user_benutzer_id          varchar(40),
   constraint pk_weight primary key (weight_id))
 ;
 

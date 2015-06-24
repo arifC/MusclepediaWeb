@@ -144,7 +144,8 @@ public class Application extends Controller {
     }
     public static Result profil(){
         if(checkLogin()){
-            return ok(profil.render(loggedInUser));
+            List<Weight> weights = Ebean.find(Weight.class).findList();
+            return ok(profil.render(weights,loggedInUser));
         }
         else{
             return redirect("/");
@@ -247,7 +248,8 @@ public class Application extends Controller {
         }
         checkLogin();
         loggedInUser.deleteFromPlan(uebungsauswahl);
-        return ok(profil.render(loggedInUser));
+        List<Weight> weights = Ebean.find(Weight.class).findList();
+        return ok(profil.render(weights,loggedInUser));
     }
 
     public static Result rateStudio(){
@@ -297,13 +299,14 @@ public class Application extends Controller {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String oldPW = verschluesseln(dynamicForm.get("oldPassword"));
         checkLogin();
+        List<Weight> weights = Ebean.find(Weight.class).findList();
         if(oldPW.equals(loggedInUser.getPassword())){
             String newPW = verschluesseln(dynamicForm.get("newPassword"));
             loggedInUser.setPassword(newPW);
-            return ok(profil.render(loggedInUser));
+            return ok(profil.render(weights,loggedInUser));
         }
         else{
-            return ok(profil.render(loggedInUser));
+            return ok(profil.render(weights,loggedInUser));
         }
 
     }
@@ -322,7 +325,8 @@ public class Application extends Controller {
                 loggedInUser.setStudio(studio);
             }
         }
-        return ok(profil.render(loggedInUser));
+        List<Weight> weights = Ebean.find(Weight.class).findList();
+        return ok(profil.render(weights,loggedInUser));
     }
 
 
@@ -381,8 +385,10 @@ public class Application extends Controller {
     public static Result addWeight() {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         double weight = Double.parseDouble(dynamicForm.get("weight"));
-        loggedInUser.addWeight(weight);
-        return ok(profil.render(loggedInUser));
+        loggedInUser.addWeight(weight, loggedInUser);
+
+        List<Weight> weights = Ebean.find(Weight.class).findList();
+        return ok(profil.render(weights , loggedInUser));
     }
 
     /*public static Result generatePDF() {
