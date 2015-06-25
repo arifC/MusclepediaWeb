@@ -29,7 +29,6 @@ public class Plan {
     @ManyToMany
     private List<Exercise> uebungsliste;
     /**
-     *
      *Constructor für den Plan erwartet den Typ als Übergabeparameter
      */
     public Plan(String type){
@@ -38,33 +37,31 @@ public class Plan {
         this.uebungsliste = new ArrayList<Exercise>();
 
     }
-    /**
-     *
-     *Fügt die übergebene Übung den Plan hinzu
-     */
 
+    /**
+     * Fügt die übergebene Übung den Plan hinzu
+     */
     public void addUebung(Exercise u){
         uebungsliste.add(u);
         Ebean.save(this);
     }
+
     /**
-     *
-     *Löscht die übergebene Übung aus dem Plan
+     * Löscht die übergebene Übung aus dem Plan
      */
     public void deleteUebung(Exercise u){
 
         uebungsliste.remove(u);
         Ebean.save(this);
     }
+
     /**
-     *
-     *@return gibt dem Ganzen Plan zurück
+     *@return gibt den ganzen Plan zurück
      */
     public List<Exercise> showPlan(){
         return uebungsliste;
     }
     /**
-     *
      *@return gibt den Typ des Plans zurück
      */
     public String getType() {

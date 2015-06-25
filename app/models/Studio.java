@@ -19,6 +19,9 @@ public class Studio {
     private String strasse;
     private String name;
 
+    /**
+     * Jedes Studio enthält eine Liste verschiedener Rating-Objekte, die jeweils von verschiedenen Usern erstellt wurden
+     */
     @OneToMany(cascade=CascadeType.ALL)
     private List<Rating> ratings;
 
@@ -28,6 +31,13 @@ public class Studio {
     private double totalPrice = 0;
     private double totalService = 0;
 
+    /**
+     * Konstruktor für das Erstellen eines Studios mit eindeutiger ID in der Datenbank. IDs werden generiert.
+     * @param name
+     * @param strasse
+     * @param plz
+     * @param ort
+     */
     public Studio(String name, String strasse, int plz, String ort){
         ratings = new ArrayList<Rating>();
         this.name = name;
@@ -37,31 +47,11 @@ public class Studio {
         this.studio_id = UUID.randomUUID();
     }
 
-        public void calcAverage(){
-        double counter = 0;
-        for(Rating rating : ratings){
-            this.totalFacilities += rating.getFacilities();
-            this.totalLocation += rating.getLocation();
-            this.totalPrice += rating.getPrice();
-            this.totalService += rating.getService();
-            counter ++;
-        }
-        this.totalFacilities /= counter;
-        this.totalLocation /= counter;
-        this.totalPrice /= counter;
-        this.totalService /= counter;
-        this.totalRating = (totalFacilities + totalLocation + totalPrice + totalService) / 4;
-    }
-
+    /**
+     * Berechnung der durchschnittlichen Bewertung eines jeweiligen Studios. Es wird durch die List der Ratings iteriert
+     * und anschließend das arithmetische Mittel gebildet. Das Ergebnis wird in der Instanzvariable totalRating gespeichert.
+     */
     public void calcAverage2(){
-        /*double counter = 0;
-        double summe=0;
-        for(Rating rating : ratings){
-            summe += rating.getValue();
-            counter++;
-        }
-        totalRating = summe/counter;
-        */
         double summe = 0;
         int counter = 0;
         List<Rating> ratings = Ebean.find(Rating.class).findList();
@@ -73,38 +63,28 @@ public class Studio {
         }
         totalRating = summe/counter;
     }
+
+    /**
+     * Ein übergebenes Rating wird der Liste von Ratings hinzugefügt und in der Datenbank gespeichert.
+     * Nach dem Hinzufügen in der List wird mit der neuen List ein neuer Durchschnitt berechnet.
+     * @param bw
+     */
     public void addBewertung(Rating bw){
         ratings.add(bw);
         calcAverage2();
         Ebean.save(this);
     }
 
-    public Rating getBewertung(int i){
-        return ratings.get(i);
-    }
-
     public String getOrt() {
         return ort;
-    }
-
-    public void setOrt(String ort) {
-        this.ort = ort;
     }
 
     public int getPlz() {
         return plz;
     }
 
-    public void setPlz(int plz) {
-        this.plz = plz;
-    }
-
     public String getStrasse() {
         return strasse;
-    }
-
-    public void setStrasse(String strasse) {
-        this.strasse = strasse;
     }
 
     public String getName() {
@@ -113,22 +93,6 @@ public class Studio {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getTotalService() {
-        return totalService;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public double getTotalLocation() {
-        return totalLocation;
-    }
-
-    public double getTotalFacilities() {
-        return totalFacilities;
     }
 
     public double getTotalRating() {

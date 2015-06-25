@@ -19,8 +19,17 @@ public class Weight {
     private UUID weight_id;
     @Constraints.Required
     private double weight;
+    /**
+     * Das Datum an dem das Gewicht erstellt wurde als Objekt der Klasse Date
+     */
     private Date date;
+    /**
+     * Das Datum an dem das Gewicht erstellt wurde als String
+     */
     private String dateText;
+    /**
+     * Jedes Gewicht ist einem bestimmten User zugeordnet. Hierzu ist in jedem Gewichtsobjekt der User gespeichert.
+     */
     @ManyToOne
     private User user;
 
