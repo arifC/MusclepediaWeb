@@ -1,4 +1,4 @@
-@import com.avaje.ebean.Ebean
+
 @(user:models.User)
 @start("Studiosuche")(user){
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -8,7 +8,7 @@
     <script>
     $(function() {
     $( "#searchStudio" ).autocomplete({
-    source: ["Radolfzell", "Konstanz", "Singen","TestOrt"]
+    source: ["Radolfzell" ,"Konstanz", "Singen","TestOrt"]
     });
     });
     </script>
