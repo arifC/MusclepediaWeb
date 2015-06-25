@@ -25,6 +25,7 @@ public class Weight {
     private User user;
 
     public Weight(double weight, User user){
+        this.weight_id = UUID.randomUUID();
         this.weight = weight;
         this.date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd. MMMM YYYY HH:mm");

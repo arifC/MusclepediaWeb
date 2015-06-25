@@ -39,6 +39,9 @@ h4 {
 .loginFehler{
     color: red;
 }
+.loginErfolgreich{
+    color: green;
+}
 #nameOutput{
     color:red;
 }

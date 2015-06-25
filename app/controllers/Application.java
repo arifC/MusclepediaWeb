@@ -13,7 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
-//import play.libs.mailer.Email;
+import play.libs.mailer.Email;
 //import play.api.libs.mailer.MailerClient;
 //import javax.inject.Inject;
 
@@ -388,6 +388,7 @@ public class Application extends Controller {
         boolean ratingAlreadyExists = false;
         boolean valueNotInRange = false;
         if (ratings != null) {
+            checkLogin();
             for (Rating r : ratings) {
                 if (r.getStudio().getName().equals(studioname) && r.getUser().getName().equals(loggedInUser.getName())) {
                     ratingAlreadyExists = true;

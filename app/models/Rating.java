@@ -71,6 +71,7 @@ public class Rating {
      *
      */
     public Rating(Studio studio, User user, int value){
+        this.rating_id = UUID.randomUUID();
         this.studio = studio;
         this.user = user;
         this.value=value;

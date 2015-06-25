@@ -1,5 +1,5 @@
 function addToPlan(){
-    alert("Exercise added to your plan successfully !!!");
+    alert("Übung erfolgreich hinzugefügt");
 }
 function bigImg(x){
     x.style.height = "400px";
@@ -14,3 +14,4 @@ function normalImg(x){
 }/**
  * Created by Felix on 01.05.2015.
  */
+
