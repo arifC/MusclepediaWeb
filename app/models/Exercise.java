@@ -46,6 +46,7 @@ public class Exercise {
     @Constraints.Required
     private String schwierigkeit;
     /**
+     * @param String Name
      * Constructor mit Name als Übergabeparameter
      *
      */
@@ -53,6 +54,7 @@ public class Exercise {
         this.name=name;
     }
     /**
+     * @param String Name, Muscle Muskel, String Beschreibung, String Schwierigkeit
      * Constructor mit Name, Muskel, Beschreibung und Schwierigkeit
      *
      */

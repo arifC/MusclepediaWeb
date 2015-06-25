@@ -29,6 +29,7 @@ public class Plan {
     @ManyToMany
     private List<Exercise> uebungsliste;
     /**
+     * @param String Typ
      *Constructor für den Plan erwartet den Typ als Übergabeparameter
      */
     public Plan(String type){
@@ -39,6 +40,7 @@ public class Plan {
     }
 
     /**
+     * @param Exercise
      * Fügt die übergebene Übung den Plan hinzu
      */
     public void addUebung(Exercise u){
