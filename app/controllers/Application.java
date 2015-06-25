@@ -467,6 +467,12 @@ public class Application extends Controller {
 
         return ok(home.render(loggedInUser));
     }
+
+    /**
+     * Serverseitige Überprüfung des gewünschten Nutzernames auf gewählte Regeln
+     * @param input Username der bei der Registrierung eingegeben wird
+     * @return "Nachricht" ob Regeln korrekt eingehalten wurden oder nicht
+     */
     public static Result checkName(String input){
         String result ="";
         if(input.equals("")){
@@ -478,6 +484,12 @@ public class Application extends Controller {
         }
         return ok(result);
     }
+
+    /**
+     * Serverseitige Überprüfung des gewünschten Passworts auf gewählte Regeln
+     * @param input Passwort das bei der Registrierung eingegeben wird
+     * @return "Nachricht" ob das Passwort sicher ist oder nicht
+     */
     public static Result checkPassword(String input){
         String result =" ";
         if(input.equals("")){
@@ -490,15 +502,21 @@ public class Application extends Controller {
         return ok(result);
     }
 
+    /**
+     * Das gewählte Gewicht vom User wird ausgelesen und ein neues Weight erzeugt. Dieses wird dann dem user hinzugefügt
+     * @return Menupunkt Profil
+     */
     public static Result addWeight() {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         double weight = Double.parseDouble(dynamicForm.get("weight"));
         loggedInUser.addWeight(weight, loggedInUser);
-
-        List<Weight> weights = Ebean.find(Weight.class).findList();
         return ok(profil.render(getWeights() , loggedInUser));
     }
 
+    /**
+     * Holt alle Weights als aus der Datenbank und speichert sie in einer Liste
+     * @return Eine List mit allen Weights
+     */
     public static List<Weight> getWeights(){
         return Ebean.find(Weight.class).findList();
     }
