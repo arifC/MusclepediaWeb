@@ -69,10 +69,28 @@ public class Application extends Controller {
         //Übungen
         Exercise french_arme = new Exercise("Frenchpress", Muscle.Arme, "Eine Trizepsübung im Liegen, die alle Muskelköpfe belastet.", "Fortgeschritten");
         Exercise hammer_arme = new Exercise("Hammer-Curls", Muscle.Arme, "Eine Bizepsübung im Stehen, die den Bizeps und den Unterarm trainiert.", "Fortgeschritten");
-        Exercise konz_arme = new Exercise("Konzentration-Curls", Muscle.Arme, "Eine Bizepsübung im Sitzen, die sich auf den inneren Muskelkopf konzentriert.", "Fortgeschritten");
+        Exercise sz_arme = new Exercise("SZ-Curls", Muscle.Arme, "Eine Bizepsübung im Stehen, die sich auf den inneren Muskelkopf konzentriert.", "Fortgeschritten");
+        Exercise bankdruecken = new Exercise("bankdruecken", Muscle.Oberkoerper, "Eine Brustübung im Liegen.", "Fortgeschritten");
+        Exercise kreuzheben = new Exercise("kreuzheben", Muscle.Oberkoerper, "Eine Rückenübung im Stehen.", "Fortgeschritten");
+        Exercise lhrudern = new Exercise("lhrudern", Muscle.Oberkoerper, "Eine Rückenübung im Stehen.", "Fortgeschritten");
+        Exercise crunches = new Exercise("crunches", Muscle.Bauch, "Eine Bauchübung im Liegen.", "Fortgeschritten");
+        Exercise legraises = new Exercise("legraises", Muscle.Bauch, "Eine Bauchübung.", "Fortgeschritten");
+        Exercise situps = new Exercise("situps", Muscle.Bauch, "Eine Bauchübung im Liegen.", "Fortgeschritten");
+        Exercise kniebuegen = new Exercise("kniebeugen", Muscle.Oberkoerper, "Eine Beinübung im Stehen.", "Fortgeschritten");
+        Exercise beinstrecker = new Exercise("beinstrecker", Muscle.Oberkoerper, "Eine Beinübung im Sitzen.", "Fortgeschritten");
+        Exercise beinbeuger = new Exercise("beinbeuger", Muscle.Oberkoerper, "Eine Beinübung im Sitzen.", "Fortgeschritten");
         Ebean.save(french_arme);
         Ebean.save(hammer_arme);
-        Ebean.save(konz_arme);
+        Ebean.save(sz_arme);
+        Ebean.save(bankdruecken);
+        Ebean.save(kreuzheben);
+        Ebean.save(lhrudern);
+        Ebean.save(crunches);
+        Ebean.save(legraises);
+        Ebean.save(situps);
+        Ebean.save(kniebuegen);
+        Ebean.save(beinstrecker);
+        Ebean.save(beinbeuger);
 
     }
 
