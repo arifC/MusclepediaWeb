@@ -13,9 +13,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
-import play.libs.mailer.Email;
-//import play.api.libs.mailer.MailerClient;
-//import javax.inject.Inject;
+
+
 
 
 public class Application extends Controller {
