@@ -2,20 +2,23 @@ package controllers;
 
 import com.avaje.ebean.Ebean;
 import models.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.*;
 import play.data.Form;
-//import it.innove.PdfGenerator;
+
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Locale;
-
-
-
 
 public class Application extends Controller {
 
@@ -230,6 +233,39 @@ public class Application extends Controller {
             return redirect("/");
         }
 
+    }
+
+    public static Result sendMail2() throws Exception{
+        File file = new File("mydata.xlsx");
+        FileOutputStream fileOut = new FileOutputStream(file);
+        XSSFWorkbook wb = new XSSFWorkbook();
+        //Workbook wb = new XSSFWorkbook(); Doesn't work either
+        Sheet sheet = wb.createSheet("Sheet1");
+        int rNum = 0;
+        Row row = sheet.createRow(rNum);
+        int cNum = 0;
+        Cell cell = row.createCell(cNum);
+        cell.setCellValue("My Cell Value");
+        wb.write(fileOut);
+        fileOut.close();
+        System.out.print("IN DER METHODE");
+        return ok(kontakt.render(loggedInUser));
+    }
+
+    public static Result upload() throws Exception{
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        Http.MultipartFormData.FilePart picture = body.getFile("picture");
+        if (picture != null) {
+            String fileName = picture.getFilename();
+            String contentType = picture.getContentType();
+            System.out.print(contentType);
+            File file = picture.getFile();
+            File test = new File(new File("C:\\test.jpg"),"test.jpg");
+            return ok("File uploaded");
+        } else {
+            flash("error", "Missing file");
+            return badRequest();
+        }
     }
 
     /**
@@ -463,25 +499,12 @@ public class Application extends Controller {
     public ApplicationJava(MailerClient mailer) {
         this.mailer = mailer;
     }*/
-
     public static Result sendMail(){
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         String firstName = dynamicForm.get("name");
         String lastName =dynamicForm.get("surname");
         String answerMail= dynamicForm.get("answerMail");
         String content=dynamicForm.get("mailContent");
-
-
-        /*
-            final Email email = new Email();
-            email.setSubject("Kontakt Anfrage");
-            email.setFrom("Server FROM <from@email.com>");
-            email.addTo("Admin TO <to@email.com>");
-             email.setBodyText("Anfrage von: " +firstName +" " + lastName +" "+ answerMail +" " +content);
-             mailer.send(email);
-
-         */
-
 
         return ok(home.render(loggedInUser));
     }
@@ -539,7 +562,4 @@ public class Application extends Controller {
         return Ebean.find(Weight.class).findList();
     }
 
-    /*public static Result generatePDF() {
-            return PdfGenerator.ok(profil.render(loggedInUser), "http://localhost:9000");
-    }*/
 }

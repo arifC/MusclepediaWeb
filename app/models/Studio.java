@@ -20,7 +20,7 @@ public class Studio {
     private String name;
 
     /**
-     * Jedes Studio enthält eine Liste verschiedener Rating-Objekte, die jeweils von verschiedenen Usern erstellt wurden
+     * Jedes Studio enthÃ¤lt eine Liste verschiedener Rating-Objekte, die jeweils von verschiedenen Usern erstellt wurden
      */
     @OneToMany(cascade=CascadeType.ALL)
     private List<Rating> ratings;
@@ -32,7 +32,7 @@ public class Studio {
     private double totalService = 0;
 
     /**
-     * Konstruktor für das Erstellen eines Studios mit eindeutiger ID in der Datenbank. IDs werden generiert.
+     * Konstruktor fÃ¼r das Erstellen eines Studios mit eindeutiger ID in der Datenbank. IDs werden generiert.
      * @param name
      * @param strasse
      * @param plz
@@ -49,7 +49,7 @@ public class Studio {
 
     /**
      * Berechnung der durchschnittlichen Bewertung eines jeweiligen Studios. Es wird durch die List der Ratings iteriert
-     * und anschließend das arithmetische Mittel gebildet. Das Ergebnis wird in der Instanzvariable totalRating gespeichert.
+     * und anschlieÃŸend das arithmetische Mittel gebildet. Das Ergebnis wird in der Instanzvariable totalRating gespeichert.
      */
     public void calcAverage2(){
         double summe = 0;
@@ -65,8 +65,8 @@ public class Studio {
     }
 
     /**
-     * Ein übergebenes Rating wird der Liste von Ratings hinzugefügt und in der Datenbank gespeichert.
-     * Nach dem Hinzufügen in der List wird mit der neuen List ein neuer Durchschnitt berechnet.
+     * Ein Ã¼bergebenes Rating wird der Liste von Ratings hinzugefÃ¼gt und in der Datenbank gespeichert.
+     * Nach dem HinzufÃ¼gen in der List wird mit der neuen List ein neuer Durchschnitt berechnet.
      * @param bw
      */
     public void addBewertung(Rating bw){
