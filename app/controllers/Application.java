@@ -294,7 +294,7 @@ public class Application extends Controller {
     }
 
     /**
-     * Beim Regisitrieren wird das passwort durch diese Methode verschlüsselt und in der Datenbank abgespeichert
+     * Beim Regisitrieren wird das passwort durch diese Methode mit MD5 verschlüsselt und in der Datenbank abgespeichert
      * @param eingabe passwort als String
      * @return mit MD5 verschlüsselten HashCode
      */
@@ -312,7 +312,9 @@ public class Application extends Controller {
     }
 
     /**
-     * leitet den User zur Loginseite mit entsprechender Meldung ob Registrierung erfolgreich war oder nicht
+     * leitet den User zur Loginseite mit entsprechender Meldung ob Registrierung erfolgreich war oder nicht.
+     * Falls die Registireirung erfolgreich war wird der User mit seinen angegebenen Daten in der Datenbank gespeichert.
+     * Zuerst wird geprüft, ob der gewünschte Username oder Mail schon vergeben ist
      * @return render("username") falls name schon vergeben, render("mail") falls mail schon vergeben, render("success") falls erfolgreich
      */
     public static Result createUser(){
@@ -366,7 +368,7 @@ public class Application extends Controller {
     }
 
     /**
-     * Wenn auf eine Button "Hinzufügen" gekklickt wird, wird hier die richtige Übung aus der Datenbank rausgesucht und unter dem User abgespeichert
+     * Wenn auf den Button "Hinzufügen" bei einer Übung geklickt wird, wird hier die richtige Übung aus der Datenbank rausgesucht und unter dem User abgespeichert, sprich in seinem Trainingsplan abgespeichert
      * @return Menupunkt Home
      */
     public static Result addExercise(){
@@ -385,7 +387,7 @@ public class Application extends Controller {
     }
 
     /**
-     * Wenn neben einer Übung auf "Löschen" geklickt wird, wird hier diese Übung aus dem plan des Users gelöscht
+     * Wenn neben einer Übung beim Trainingsplan des Users auf "Löschen" geklickt wird, wird hier diese Übung aus dem plan des Users gelöscht
      * @return Menupunkt Profil
      */
     public static Result deleteExercise(){
@@ -405,7 +407,8 @@ public class Application extends Controller {
 
     /**
      * Wenn ein User ein Studio bewerten will wird diese Methode aufgerufen. Zuerst Prüfung (serverseitig) ob die Bewertung im zulässigen Rahmen ist
-     * und ob der User schon eine Bewertung für das jeweilige Studio abgegeben hat oder nicht
+     * und ob der User schon eine Bewertung für das jeweilige Studio abgegeben hat oder nicht.
+     * Falls nicht, wird die entsprehende Bewertung in der Datenbank gespeichert
      * @return Bewertung abgeben erfolgreich: render("studios_kn"), nicht erfolgreich: render("stuidos")
      */
     public static Result rateStudio(){
