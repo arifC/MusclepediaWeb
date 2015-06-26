@@ -227,7 +227,7 @@ public class Application extends Controller {
      */
     public static Result profil(){
         if(checkLogin()){
-            return ok(profil.render(getWeights(),loggedInUser));
+            return ok(profil.render(loggedInUser));
         }
         else{
             return redirect("/");
@@ -236,20 +236,25 @@ public class Application extends Controller {
     }
 
     public static Result downloadExcel() throws Exception{
-        File file = new File("mydata.xlsx");
+        File file = new File("myPlan.xlsx");
         FileOutputStream fileOut = new FileOutputStream(file);
         XSSFWorkbook wb = new XSSFWorkbook();
-        //Workbook wb = new XSSFWorkbook(); Doesn't work either
-        Sheet sheet = wb.createSheet("Sheet1");
+        Sheet sheet = wb.createSheet("Plan1");
         int rNum = 0;
         Row row = sheet.createRow(rNum);
         int cNum = 0;
         Cell cell = row.createCell(cNum);
-        cell.setCellValue("My Cell Value");
+        cell.setCellValue("Mein Trainingsplan");
+        List<Exercise> myPlan = loggedInUser.showPlan();
+        for(int i = 2; i < myPlan.size(); i++){
+            Row r = sheet.createRow(i);
+            Cell c = r.createCell(0);
+            c.setCellValue(myPlan.get(0).getName());
+        }
         wb.write(fileOut);
         fileOut.close();
         response().setContentType("application/x-download");
-        response().setHeader("Content-disposition","attachment; filename=mydata.xlsx");
+        response().setHeader("Content-disposition","attachment; filename=myPlan.xlsx");
         return ok(file);
         //return ok(kontakt.render(loggedInUser));
     }
@@ -369,7 +374,7 @@ public class Application extends Controller {
         }
         checkLogin();
         loggedInUser.addToPlan(uebungsauswahl);
-        return ok(home.render(loggedInUser));
+        return ok(profil.render(loggedInUser));
     }
 
     /**
@@ -388,7 +393,7 @@ public class Application extends Controller {
         }
         checkLogin();
         loggedInUser.deleteFromPlan(uebungsauswahl);
-        return ok(profil.render(getWeights(),loggedInUser));
+        return ok(profil.render(loggedInUser));
     }
 
     /**
@@ -454,10 +459,10 @@ public class Application extends Controller {
         if(oldPW.equals(loggedInUser.getPassword())){
             String newPW = verschluesseln(dynamicForm.get("newPassword"));
             loggedInUser.setPassword(newPW);
-            return ok(profil.render(getWeights(),loggedInUser));
+            return ok(profil.render(loggedInUser));
         }
         else{
-            return ok(profil.render(getWeights(),loggedInUser));
+            return ok(profil.render(loggedInUser));
         }
 
     }
@@ -480,7 +485,7 @@ public class Application extends Controller {
                 loggedInUser.setStudio(studio);
             }
         }
-        return ok(profil.render(getWeights(),loggedInUser));
+        return ok(profil.render(loggedInUser));
     }
     /*private final MailerClient mailer;
 
@@ -540,7 +545,7 @@ public class Application extends Controller {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         double weight = Double.parseDouble(dynamicForm.get("weight"));
         loggedInUser.addWeight(weight, loggedInUser);
-        return ok(profil.render(getWeights() , loggedInUser));
+        return ok(profil.render(sloggedInUser));
     }
 
     /**
