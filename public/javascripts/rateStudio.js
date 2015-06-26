@@ -2,6 +2,7 @@
  * Created by Felix on 19.06.2015.
  */
 function rateStudio(){
+    alert("hallo");
     var value = document.forms["ratingForm"]["value"].value;
     var x = document.getElementById("rating").value;
 
