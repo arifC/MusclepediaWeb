@@ -10,7 +10,7 @@
                             <tr><th> Name </th> <th> Ort </th><th> Straße </th> <th>PLZ</th><th> Durchschnittliche Bewertung </th> <th> Bewerten </th></tr>
                             <tr> <td>@s.getName()</td>  <td>@s.getOrt</td> <td>@s.getStrasse</td> <td>@s.getPlz()</td> <td>@s.getTotalRating</td>
                             <td><form name="ratingForm" action="/rateStudio" method="get">
-                                <input type="text" name="value" placeholder="zwischen 1 und 10"/>
+                                <input type="text" name="value" placeholder="zwischen 1 und 10" id="rating"/>
                                 <input type="submit" class="btn btn-primary" value="Bewertung abgeben" onclick="javascripts:rateStudio()">
                                 <input type="hidden" name="studio" value="@s.getName">
                                 </form>

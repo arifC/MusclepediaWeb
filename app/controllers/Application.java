@@ -408,6 +408,7 @@ public class Application extends Controller {
         int rating = 0;
         List<Rating> ratings = Ebean.find(Rating.class).findList();
         String studioname = dynamicForm.get("studio");
+        List<Studio> s = Ebean.find(Studio.class).where().eq("ort", "Konstanz").findList();
         try {
             rating = Integer.parseInt(dynamicForm.get("value"));
         }catch(NumberFormatException e){
@@ -430,20 +431,19 @@ public class Application extends Controller {
         if(!ratingAlreadyExists && !valueNotInRange) {
             List<Studio> studios = Ebean.find(Studio.class).findList();
             Studio chosenStudio = null;
-            for (Studio s : studios) {
-                if (s.getName().equals(studioname)) {
-                    chosenStudio = s;
+            for (Studio s2 : studios) {
+                if (s2.getName().equals(studioname)) {
+                    chosenStudio = s2;
                 }
             }
             checkLogin();
             Rating rating2 = new Rating(chosenStudio, loggedInUser, rating);
             Ebean.save(rating2);
             loggedInUser.rateStudio(chosenStudio, rating2);
-            List<Studio> s = Ebean.find(Studio.class).where().eq("ort", "Konstanz").findList();
             return ok(studios_kn.render(s,loggedInUser));
         }else{
             // Hier muss dann noch eine Ausgabe hin: "also Bewertung bereits abgegeben"
-            return ok(studios.render(loggedInUser));
+            return ok(studios_kn.render(s,loggedInUser));
         }
     }
 
