@@ -246,10 +246,10 @@ public class Application extends Controller {
         Cell cell = row.createCell(cNum);
         cell.setCellValue("Mein Trainingsplan");
         List<Exercise> myPlan = loggedInUser.showPlan();
-        for(int i = 2; i < myPlan.size(); i++){
-            Row r = sheet.createRow(i);
+        for(int i = 0; i < myPlan.size(); i++){
+            Row r = sheet.createRow(i+2);
             Cell c = r.createCell(0);
-            c.setCellValue(myPlan.get(0).getName());
+            c.setCellValue(myPlan.get(i).getName());
         }
         wb.write(fileOut);
         fileOut.close();
