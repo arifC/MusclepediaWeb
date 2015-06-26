@@ -545,7 +545,7 @@ public class Application extends Controller {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         double weight = Double.parseDouble(dynamicForm.get("weight"));
         loggedInUser.addWeight(weight, loggedInUser);
-        return ok(profil.render(sloggedInUser));
+        return ok(profil.render(loggedInUser));
     }
 
     /**
