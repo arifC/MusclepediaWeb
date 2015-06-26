@@ -11,12 +11,6 @@ create table exercise (
   constraint pk_exercise primary key (exercise_id))
 ;
 
-create table picture (
-  id                        varchar(40) not null,
-  img                       varbinary(255),
-  constraint pk_picture primary key (id))
-;
-
 create table plan (
   plan_id                   varchar(40) not null,
   type                      varchar(255),
@@ -94,8 +88,6 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table exercise;
 
 drop table plan_exercise;
-
-drop table picture;
 
 drop table plan;
 

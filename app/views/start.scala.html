@@ -53,7 +53,7 @@
                 <!-- Menue -->
                 <div class="col-md-8">
                     <ul class="nav nav-tabs">
-                        <li id="start"><a href="/home">Home</a></li>
+                        <li id="home"><a href="/home">Home</a></li>
                         <li class="dropdown" id="uebungen">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Uebungen<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -82,5 +82,23 @@
             </div>
         </div>
         </div>
+        <script>
+            $(document).ready(function (){
+                $(".nav-tabs").children("li").removeClass("active");
+                var url = window.location.pathname;
+                if(url.search("uebungen")!=-1){
+                    url = url.substring(1,9);
+                }
+                else{
+                    if(url.search("plaene")!=-1){
+                        url = url.substring(1,7);
+                    }
+                    else{
+                        url = url.substring(1);
+                    }
+                }
+                $("#" + url).addClass("active");
+            });
+        </script>
     </body>
 </html>

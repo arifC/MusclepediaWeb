@@ -1,16 +1,6 @@
 @(weights : java.util.List[models.Weight], user: models.User)
 @start("Musclepedia")(user){
     <script src="@routes.Assets.at("javascripts/changePassword.js")" type="text/javascript"></script>
-    @helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
-
-        <input type="file" name="picture">
-
-        <p>
-            <input type="submit">
-        </p>
-
-    }
-
     <div>
         <div class="col-md-6">
             <div role="tabpanel" class="tab-pane">
@@ -55,6 +45,11 @@
             </div>
         }
     </div>
+    <div class="col-md-8 col-md-offset-2">
+        <form method="get" action="/downloadExcel">
+            <input type="submit" class="btn btn-success" value="Als Excel exportieren"/>
+        </form>
+    </div>
     <br/>
     <div class="col-md-8 col-md-offset-2">
         <table border="2" class="table table-striped">
@@ -75,6 +70,4 @@
             <input type="submit" class="btn btn-success" value="Gewicht hinzufuegen"/>
         </form>
     </div>
-    <br/>
-    <a href="/generatePDF">Als PDF exportieren (nicht funktionstüchtig)</a>
 }

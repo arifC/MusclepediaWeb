@@ -235,7 +235,7 @@ public class Application extends Controller {
 
     }
 
-    public static Result sendMail2() throws Exception{
+    public static Result downloadExcel() throws Exception{
         File file = new File("mydata.xlsx");
         FileOutputStream fileOut = new FileOutputStream(file);
         XSSFWorkbook wb = new XSSFWorkbook();
@@ -248,24 +248,10 @@ public class Application extends Controller {
         cell.setCellValue("My Cell Value");
         wb.write(fileOut);
         fileOut.close();
-        System.out.print("IN DER METHODE");
-        return ok(kontakt.render(loggedInUser));
-    }
-
-    public static Result upload() throws Exception{
-        Http.MultipartFormData body = request().body().asMultipartFormData();
-        Http.MultipartFormData.FilePart picture = body.getFile("picture");
-        if (picture != null) {
-            String fileName = picture.getFilename();
-            String contentType = picture.getContentType();
-            System.out.print(contentType);
-            File file = picture.getFile();
-            File test = new File(new File("C:\\test.jpg"),"test.jpg");
-            return ok("File uploaded");
-        } else {
-            flash("error", "Missing file");
-            return badRequest();
-        }
+        response().setContentType("application/x-download");
+        response().setHeader("Content-disposition","attachment; filename=mydata.xlsx");
+        return ok(file);
+        //return ok(kontakt.render(loggedInUser));
     }
 
     /**
